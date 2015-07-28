@@ -31,6 +31,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+
+    public void clearAllData() {
+        
+    }
+
     public void replaceMainFragment(Fragment fragment) {
         Log.d("Fragment Replacement", fragment.getClass().getSimpleName());
         replaceMainFragment(fragment, false);

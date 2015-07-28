@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void clearAllData() {
-        
+
     }
 
     public void replaceMainFragment(Fragment fragment) {

@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import yt.inventory.R;
+import yt.inventory.reference.App;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -24,12 +25,24 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
+        App.setMainActivity(this);
+
 
 
 
     }
 
+
+
+
+    public boolean initializeCheckDataValidity() {
+
+
+        return false;
+    }
 
 
     public void clearAllData() {

@@ -9,8 +9,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import yt.inventory.App;
 import yt.inventory.R;
-import yt.inventory.reference.App;
+import yt.inventory.utility.StarterRoutine;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -29,6 +30,13 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         App.setMainActivity(this);
+
+        if (App.isFirstRun()) {
+            StarterRoutine.setupVars();
+
+        } else {
+
+        }
 
 
 

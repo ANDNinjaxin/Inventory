@@ -27,6 +27,8 @@ public class App extends Application {
 
 
 
+
+
     @Override
     public void onCreate() {
 
@@ -69,7 +71,6 @@ public class App extends Application {
 
 
     public void setBoolean(String string, boolean page) {
-        pref.edit().pu
         pref.edit().putBoolean(string, page).commit();
     }
 
@@ -84,5 +85,17 @@ public class App extends Application {
     public static ArrayList<BookTransaction> getBookTransactionList() {
 
     }
+
+    public static boolean isFirstRun() {
+        if (pref.getBoolean("firstrun", false)) {
+            pref.edit().putBoolean("firstrun", true).commit();
+            return false;
+
+        } else {
+            return true;
+        }
+    }
+
+
 
 }

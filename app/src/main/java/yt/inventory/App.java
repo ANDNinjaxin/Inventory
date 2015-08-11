@@ -31,6 +31,7 @@ public class App extends Application {
 
 
 
+
     @Override
     public void onCreate() {
 
@@ -128,4 +129,16 @@ public class App extends Application {
     public static void clearAllCloudData() {
         //TODO wipe app storage data on gdrive
     }
+    public static boolean isFirstRun() {
+        if (pref.getBoolean("firstrun", false)) {
+            pref.edit().putBoolean("firstrun", true).commit();
+            return false;
+
+        } else {
+            return true;
+        }
+    }
+
+
+
 }

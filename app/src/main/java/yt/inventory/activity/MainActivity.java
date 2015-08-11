@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import yt.inventory.App;
 import yt.inventory.R;
-import yt.inventory.reference.App;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -46,7 +46,7 @@ public class MainActivity extends ActionBarActivity {
 
 
     public void clearAllData() {
-
+        //TODO: Move this function to App
     }
 
     public void replaceMainFragment(Fragment fragment) {

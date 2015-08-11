@@ -1,9 +1,19 @@
 package yt.inventory.utility;
 
+import java.util.ArrayList;
+
 /**
  * Created by Ninjaxin on 7/29/15.
  */
 public class Checks {
+
+    public boolean isNonEmpty(ArrayList aList) {
+        if (aList.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 
 

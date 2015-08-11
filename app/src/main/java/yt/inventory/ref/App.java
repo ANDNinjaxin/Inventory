@@ -1,4 +1,4 @@
-package yt.inventory.reference;
+package yt.inventory.ref;
 
 import android.app.Application;
 import android.content.Context;

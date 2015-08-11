@@ -4,7 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import yt.inventory.activity.MainActivity;
 import yt.inventory.object.Book;
@@ -103,6 +107,63 @@ public class App extends Application {
 
     public static void setBookTransactionList(ArrayList<BookTransaction> transList) {
         bookTransactionList = transList;
+    }
+
+    /**
+     *      Save Data
+     */
+    public static void saveAllData() {
+//        Set<Student> hsetStudent = new HashSet<>();
+//        Set<Book> hsetBook = new HashSet<>();
+//        Set<BookTransaction> hsetBookTransaction = new HashSet<>();
+//
+//        hsetStudent.addAll(studentList);
+//        hsetBook.addAll(bookList);
+//        hsetBookTransaction.addAll(bookTransactionList);
+
+        SharedPreferences.Editor editor = pref.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(bookList);
+
+
+        try {
+
+        } catch(Exception e) {
+
+        }
+
+
+        /*
+
+        public static final String CONNECTIONS = "connections";
+SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+
+User entity = new User();
+// ... set entity fields
+
+List<Connection> connections = entity.getConnections();
+// convert java object to JSON format,
+// and returned as JSON formatted string
+String connectionsJSONString = new Gson().toJson(connections);
+editor.putString(CONNECTIONS, connectionsJSONString);
+editor.commit();
+
+
+
+
+String connectionsJSONString = getPreferences(MODE_PRIVATE).getString(CONNECTIONS, null);
+Type type = new TypeToken < List < Connection >> () {}.getType();
+List < Connection > connections = new Gson().fromJson(connectionsJSONString, type);
+
+         */
+
+
+
+
+
+
+
+
     }
 
     /*

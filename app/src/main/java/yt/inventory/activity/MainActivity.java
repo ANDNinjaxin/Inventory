@@ -1,5 +1,7 @@
 package yt.inventory.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +13,9 @@ import android.view.MenuItem;
 
 import yt.inventory.App;
 import yt.inventory.R;
+import yt.inventory.fragment.HomeFragment;
+import yt.inventory.fragment.ImportDataFragment;
+import yt.inventory.fragment.ManualInputDataFragment;
 import yt.inventory.utility.StarterRoutine;
 
 
@@ -30,20 +35,20 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         App.setMainActivity(this);
+        App.initialize();
 
         if (App.isFirstRun()) {
-            StarterRoutine.setupVars();
+            startupRoutine();
 
         } else {
-
+            if (App.loadAllData()) {
+                gotoHomePage();
+            } else {
+                gotoImportData();
+            }
         }
 
-
-
-
     }
-
-
 
 
     public boolean initializeCheckDataValidity() {
@@ -52,9 +57,40 @@ public class MainActivity extends ActionBarActivity {
         return false;
     }
 
+    public void startupRoutine() {
+        new AlertDialog.Builder(this)
+                .setTitle(App.string(R.string.no_data))
+                .setMessage(App.string(R.string.startup_no_data))
+                .setPositiveButton(App.string(R.string.yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //TODO: Pull Cloud data
+                    }
+                })
+                .setNegativeButton(App.string(R.string.no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        gotoManualImportData();
 
-    public void clearAllData() {
-        //TODO: Move this function to App
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    public void gotoHomePage() {
+        final Fragment fragment = new HomeFragment();
+        replaceMainFragment(fragment);
+    }
+
+    public void gotoImportData() {
+        final Fragment fragment = new ImportDataFragment();
+        replaceMainFragment(fragment);
+    }
+
+    public void gotoManualImportData() {
+        final Fragment fragment = new ManualInputDataFragment();
+        replaceMainFragment(fragment);
     }
 
     public void replaceMainFragment(Fragment fragment) {

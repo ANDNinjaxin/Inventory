@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\GPShopper\self\Inventory\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="D:\GPShopper\self\Inventory\app\build\intermediates\pre-dexed\debug\classes-140ee4125e68e8aed7d7bf944513accde860893c.jar" />
+    </item>
+    <item
+        jar="C:\Users\Ninjaxin\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="D:\GPShopper\self\Inventory\app\build\intermediates\pre-dexed\debug\gson-2.2.4-c6a3f61582eba7299b0f1e8b13d597bc003202a2.jar" />
+    </item>
+    <item
+        jar="D:\GPShopper\self\Inventory\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="D:\GPShopper\self\Inventory\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-74a8d5d1ddc97034da97a53475201a22c7801527.jar" />
+    </item>
+    <item
+        jar="D:\School\Android SDK\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="D:\GPShopper\self\Inventory\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-f04dc23ac575e4c41650d7c1a1196d931e65e1d9.jar" />
+    </item>
+    <item
+        jar="D:\GPShopper\self\Inventory\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="D:\GPShopper\self\Inventory\app\build\intermediates\pre-dexed\debug\classes-d4e64b61dd84d45845d6278a518359c3aafcac41.jar" />
+    </item>
+
+</items>

@@ -3,9 +3,12 @@ package yt.inventory;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,18 +41,17 @@ public class App extends Application {
 
     @Override
     public void onCreate() {
-
         instance = this;
         context = instance;
-
         super.onCreate();
-
-
-//        sharedPreference = context.getSharedPreferences(
-//                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
     }
 
+    public static void initialize() {
+//        context = mainActivity.getApplicationContext();
+        pref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
+
+    }
 
     public static void setMainActivity(MainActivity mainActivity) {
         App.mainActivity = mainActivity;
@@ -60,23 +62,25 @@ public class App extends Application {
     }
 
     public static Context getContext() {
-        return instance;
+        return context;
     }
 
     public static App getInstance() {
         return instance;
     }
 
+    public static String string(int id) {
+        return App.getContext().getString(id);
+    }
+
     public static SharedPreferences getPreferences() {
-        return instance.getSharedPreferences(instance.getPackageName(), Context.MODE_PRIVATE);
+        return context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
     }
 
     //duplicate - see which is better naming convention
     public static SharedPreferences prefs() {
-        return instance.getSharedPreferences(instance.getPackageName(), Context.MODE_PRIVATE);
+        return context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
     }
-
-
 
     public void setBoolean(String string, boolean page) {
         pref.edit().putBoolean(string, page).commit();
@@ -113,18 +117,17 @@ public class App extends Application {
      *      Save Data
      */
     public static void saveAllData() {
-//        Set<Student> hsetStudent = new HashSet<>();
-//        Set<Book> hsetBook = new HashSet<>();
-//        Set<BookTransaction> hsetBookTransaction = new HashSet<>();
-//
-//        hsetStudent.addAll(studentList);
-//        hsetBook.addAll(bookList);
-//        hsetBookTransaction.addAll(bookTransactionList);
 
         SharedPreferences.Editor editor = pref.edit();
         Gson gson = new Gson();
-        String json = gson.toJson(bookList);
 
+        String jsonBookList = gson.toJson(bookList);
+        String jsonStudentList = gson.toJson(studentList);
+        String jsonBookTransactionList = gson.toJson(bookTransactionList);
+
+        editor.putString("booklist", jsonBookList).apply();
+        editor.putString("studentlist", jsonStudentList).apply();
+        editor.putString("booktransactionlist", jsonBookTransactionList).apply();
 
         try {
 
@@ -132,37 +135,37 @@ public class App extends Application {
 
         }
 
+    }
 
-        /*
+    public static boolean loadAllData() {
 
-        public static final String CONNECTIONS = "connections";
-SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+        try {
+            Gson gson = new Gson();
 
-User entity = new User();
-// ... set entity fields
+            String jsonBookList = pref.getString("booklist", null);
+            String jsonStudentList = pref.getString("studentlist", null);
+            String jsonBookTransactionList = pref.getString("booktransactionlist", null);
 
-List<Connection> connections = entity.getConnections();
-// convert java object to JSON format,
-// and returned as JSON formatted string
-String connectionsJSONString = new Gson().toJson(connections);
-editor.putString(CONNECTIONS, connectionsJSONString);
-editor.commit();
+            Type typeBook = new TypeToken<ArrayList<Book>>() {
+            }.getType();
+            Type typeStudent = new TypeToken<ArrayList<Student>>() {
+            }.getType();
+            Type typeBookTransaction = new TypeToken<ArrayList<BookTransaction>>() {
+            }.getType();
 
+            ArrayList<Book> cbookList = gson.fromJson(jsonBookList, typeBook);
+            ArrayList<Student> cstudentList = gson.fromJson(jsonStudentList, typeStudent);
+            ArrayList<BookTransaction> cbookTransactionList = gson.fromJson(jsonBookTransactionList, typeBookTransaction);
 
+            bookList = cbookList;
+            studentList = cstudentList;
+            bookTransactionList = cbookTransactionList;
 
+            return true;
 
-String connectionsJSONString = getPreferences(MODE_PRIVATE).getString(CONNECTIONS, null);
-Type type = new TypeToken < List < Connection >> () {}.getType();
-List < Connection > connections = new Gson().fromJson(connectionsJSONString, type);
-
-         */
-
-
-
-
-
-
-
+        } catch (Exception e) {
+            return false;
+        }
 
     }
 
@@ -191,8 +194,8 @@ List < Connection > connections = new Gson().fromJson(connectionsJSONString, typ
         //TODO wipe app storage data on gdrive
     }
     public static boolean isFirstRun() {
-        if (pref.getBoolean("firstrun", false)) {
-            pref.edit().putBoolean("firstrun", true).commit();
+        if (pref.getBoolean("firstrun", true)) {
+            pref.edit().putBoolean("firstrun", false).commit();
             return false;
 
         } else {

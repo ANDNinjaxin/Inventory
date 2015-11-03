@@ -5,24 +5,24 @@ package yt.inventory.object;
  */
 public class BookTransaction {
 
-    private String studentID;
+    private int studentID;
     private String bookCheckedOut;
     private String bookCheckedIn;
     private Book itemBook;
 
     public BookTransaction() {
-        this.studentID = "";
+        this.studentID = 0;
         this.bookCheckedOut = "";
         this.bookCheckedIn = "";
         this.itemBook = new Book(); // unnecessary?
     }
 
 
-    public String getStudentID() {
+    public int getStudentID() {
         return studentID;
     }
 
-    public void setStudentID(String studentID) {
+    public void setStudentID(int studentID) {
         this.studentID = studentID;
     }
 

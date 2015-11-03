@@ -2,39 +2,53 @@
 <items version="2" >
 
     <item
-        jar="D:\GPShopper\self\Inventory\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.1.1\jars\classes.jar"
+        jar="/Users/Ninjaxin/.gradle/caches/modules-2/files-2.1/commons-codec/commons-codec/1.9/9ce04e34240f674bc72680f8b843b1457383161a/commons-codec-1.9.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
-        <dex dex="D:\GPShopper\self\Inventory\app\build\intermediates\pre-dexed\debug\classes-140ee4125e68e8aed7d7bf944513accde860893c.jar" />
+        sha1="9ce04e34240f674bc72680f8b843b1457383161a">
+        <dex dex="/Users/Ninjaxin/Files/GPShopper/Inventory2/app/build/intermediates/pre-dexed/debug/commons-codec-1.9-655fb624735c6117f8229f2dbdab4aa049cca1ce.jar" />
     </item>
     <item
-        jar="C:\Users\Ninjaxin\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.2.4\a60a5e993c98c864010053cb901b7eab25306568\gson-2.2.4.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="a60a5e993c98c864010053cb901b7eab25306568">
-        <dex dex="D:\GPShopper\self\Inventory\app\build\intermediates\pre-dexed\debug\gson-2.2.4-c6a3f61582eba7299b0f1e8b13d597bc003202a2.jar" />
-    </item>
-    <item
-        jar="D:\GPShopper\self\Inventory\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\libs\internal_impl-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
-        <dex dex="D:\GPShopper\self\Inventory\app\build\intermediates\pre-dexed\debug\internal_impl-22.1.1-74a8d5d1ddc97034da97a53475201a22c7801527.jar" />
-    </item>
-    <item
-        jar="D:\School\Android SDK\sdk\extras\android\m2repository\com\android\support\support-annotations\22.1.1\support-annotations-22.1.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
-        <dex dex="D:\GPShopper\self\Inventory\app\build\intermediates\pre-dexed\debug\support-annotations-22.1.1-f04dc23ac575e4c41650d7c1a1196d931e65e1d9.jar" />
-    </item>
-    <item
-        jar="D:\GPShopper\self\Inventory\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.1.1\jars\classes.jar"
+        jar="/Users/Ninjaxin/Files/GPShopper/Inventory2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
-        <dex dex="D:\GPShopper\self\Inventory\app\build\intermediates\pre-dexed\debug\classes-d4e64b61dd84d45845d6278a518359c3aafcac41.jar" />
+        <dex dex="/Users/Ninjaxin/Files/GPShopper/Inventory2/app/build/intermediates/pre-dexed/debug/classes-e2b85117d33f8b1081fc2e875dadf7a4f2c9966c.jar" />
+    </item>
+    <item
+        jar="/Users/Ninjaxin/Files/GPShopper/Inventory2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/libs/internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="/Users/Ninjaxin/Files/GPShopper/Inventory2/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-d34d3a0c8553612798c92bad94bfa72e4a839aa6.jar" />
+    </item>
+    <item
+        jar="/Users/Ninjaxin/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.2.4/a60a5e993c98c864010053cb901b7eab25306568/gson-2.2.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="/Users/Ninjaxin/Files/GPShopper/Inventory2/app/build/intermediates/pre-dexed/debug/gson-2.2.4-48e5c84fb522e51705e92438f70ca7655974d687.jar" />
+    </item>
+    <item
+        jar="/Users/Ninjaxin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="/Users/Ninjaxin/Files/GPShopper/Inventory2/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-47dccfbe443f54cc4fdd9e35e46903ac0e7d6784.jar" />
+    </item>
+    <item
+        jar="/Users/Ninjaxin/Files/GPShopper/Inventory2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="/Users/Ninjaxin/Files/GPShopper/Inventory2/app/build/intermediates/pre-dexed/debug/classes-6303963f8a0c7458e38c80436d8bc19c4903dde5.jar" />
+    </item>
+    <item
+        jar="/Users/Ninjaxin/.gradle/caches/modules-2/files-2.1/org.apache.poi/poi/3.13/f59f504ba8c521e61e25f417ec652fd485010f3/poi-3.13.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0f59f504ba8c521e61e25f417ec652fd485010f3">
+        <dex dex="/Users/Ninjaxin/Files/GPShopper/Inventory2/app/build/intermediates/pre-dexed/debug/poi-3.13-b78a49cba2d94aefcfbe54323af7bf57e5abc444.jar" />
     </item>
 
 </items>

@@ -32,6 +32,8 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        fragmentManager = getSupportFragmentManager();
+
         setContentView(R.layout.activity_main);
 
         App.setMainActivity(this);

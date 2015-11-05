@@ -1,15 +1,11 @@
 package yt.inventory.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 
 /**
- * Created by Ninjaxin on 8/13/2015.
+ * Created by Ninjaxin on 11/3/15.
  */
-public class ManualInputDataFragment extends BaseFragment {
-
-
-
+public class ManualInputStudentFragment extends BaseFragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

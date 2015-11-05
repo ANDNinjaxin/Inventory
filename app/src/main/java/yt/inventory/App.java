@@ -195,10 +195,10 @@ public class App extends Application {
     }
     public static boolean isFirstRun() {
         if (pref.getBoolean("firstrun", true)) {
-            pref.edit().putBoolean("firstrun", false).commit();
             return false;
 
         } else {
+            //pref.edit().putBoolean("firstrun", true).commit();
             return true;
         }
     }

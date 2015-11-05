@@ -10,10 +10,22 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
 
+    <string name="manual_input_student_id">Student ID: </string>
+    <string name="manual_input_first_name">First Name: </string>
+    <string name="manual_input_last_name">Last Name: </string>
+    <string name="manual_input_dobo">Birthdate: </string>
+    <string name="manual_input_status">Eligibility: </string>
+    <string name="manual_input_strikes">Warnings: </string>
+    <string name="manual_input_student_book_history">Book History: </string>
+
+    <string name="manual_input_book_level">Level: </string>
+    <string name="manual_input_book_number">Number: </string>
+    <string name="manual_input_book_available">Available: </string>
+
 
     <!--    Messages    -->
     <string name="startup_no_data">There appears to be no valid data.
-            Would you like to pull data from another source?</string>
+            Would you like to pull data from another source (Google Drive)?</string>
 
 
 

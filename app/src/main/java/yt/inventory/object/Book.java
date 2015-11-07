@@ -18,8 +18,26 @@ public class Book {
     public Book() {
         this.id = -1;
         this.bookLevel = "";
-
+        this.bookNumber = -1;
+        this.isAvailable = true;
+        this.checkoutHistory = new ArrayList<>();
     }
+
+//    int a=123;
+//    System.out.println(String.format("%05d",a));
+
+    public Book(int id,
+                String bookLevel,
+                int bookNumber,
+                boolean isAvailable) {
+
+        this.id = id;
+        this.bookLevel = bookLevel;
+        this.bookNumber = bookNumber;
+        this.isAvailable = isAvailable;
+        this.checkoutHistory = new ArrayList<>();
+    }
+
 
     public int getId() {
         return id;

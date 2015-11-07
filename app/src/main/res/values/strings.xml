@@ -10,22 +10,36 @@
     <string name="yes">YES</string>
     <string name="no">NO</string>
 
+    <string name="student">Student</string>
+    <string name="book">Book</string>
+
+    <string name="fragmentmanualinput">Manual Input</string>
+
     <string name="manual_input_student_id">Student ID: </string>
     <string name="manual_input_first_name">First Name: </string>
     <string name="manual_input_last_name">Last Name: </string>
-    <string name="manual_input_dobo">Birthdate: </string>
+    <string name="manual_input_dob">Birthdate: </string>
     <string name="manual_input_status">Eligibility: </string>
     <string name="manual_input_strikes">Warnings: </string>
     <string name="manual_input_student_book_history">Book History: </string>
+    <string name="manual_input_dob_help">MMDDYYYY</string>
 
     <string name="manual_input_book_level">Level: </string>
     <string name="manual_input_book_number">Number: </string>
+    <string name="manual_input_book_title">Title: </string>
+    <string name="manual_input_book_author">Author: </string>
     <string name="manual_input_book_available">Available: </string>
+    <string name="manual_input_book_barcode_number">Barcode #: </string>
+
+    <string name="button_add_student">ADD STUDENT</string>
+    <string name="button_add_book">ADD BOOK</string>
 
 
     <!--    Messages    -->
     <string name="startup_no_data">There appears to be no valid data.
-            Would you like to pull data from another source (Google Drive)?</string>
+            Would you like to pull data from another source?
+            \n Yes: Pull from Google Drive.
+            \n No: Manually enter data.</string>
 
 
 

@@ -25,6 +25,21 @@ public class Student {
         this.studentsBookHistory = new ArrayList<>();
     }
 
+    public Student(int id,
+                   String firstname,
+                   String lastname,
+                   String dob) {
+
+        this.id = id;
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.dob = dob;
+        this.status = true;
+        this.strikes = 0;
+        this.studentsBookHistory = new ArrayList<>();
+    }
+
+
     public int getId() {
         return id;
     }

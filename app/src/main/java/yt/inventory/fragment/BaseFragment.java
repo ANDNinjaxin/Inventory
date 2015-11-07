@@ -25,8 +25,12 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = super.onCreateView(inflater, container, savedInstanceState);
         view = inflater.inflate(getLayoutId(), container, false);
-
+        initUI(view);
         return view;
+    }
+
+    protected void initUI(View view) {
+
     }
 
     public abstract Integer getLayoutId();

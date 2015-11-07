@@ -40,7 +40,8 @@ public class MainActivity extends ActionBarActivity {
         App.initialize();
 
         if (App.isFirstRun()) {
-            startupRoutine();
+            gotoManualImportData();
+            //startupRoutine();
 
         } else {
             if (App.loadAllData()) {
@@ -54,7 +55,6 @@ public class MainActivity extends ActionBarActivity {
 
 
     public boolean initializeCheckDataValidity() {
-
 
         return false;
     }
@@ -95,6 +95,16 @@ public class MainActivity extends ActionBarActivity {
         replaceMainFragment(fragment);
     }
 
+
+
+
+
+
+
+    /**
+     * Functionality
+     * @param fragment
+     */
     public void replaceMainFragment(Fragment fragment) {
         Log.d("Fragment Replacement", fragment.getClass().getSimpleName());
         replaceMainFragment(fragment, false);

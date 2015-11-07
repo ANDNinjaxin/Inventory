@@ -1,31 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/margin">
 
     <RelativeLayout
         android:id="@+id/RLstudentcontainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin">
 
-        <TextView
-            android:id="@+id/tvstudentid"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/RLstudentid"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="@string/manual_input_student_id" />
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/margin">
 
-        <TextView
-            android:id="@+id/tvstudentfirstname"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tvstudentid"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="@dimen/label_input"
+                android:text="@string/manual_input_student_id" />
+
+            <EditText
+                android:id="@+id/etstudentid"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/field_input"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RLstudentfirstname"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/tvstudentid"
-            android:layout_below="@+id/tvstudentid"/>
+            android:layout_below="@+id/RLstudentid"
+            android:layout_margin="@dimen/margin">
 
+            <TextView
+                android:id="@+id/tvstudentfirstname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:textStyle="bold"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/label_input"
+                android:text="@string/manual_input_first_name"/>
+
+            <EditText
+                android:id="@+id/etstudentfirstname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/field_input"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RLstudentlastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RLstudentfirstname"
+            android:layout_margin="@dimen/margin">
+
+            <TextView
+                android:id="@+id/tvstudentlastname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="@dimen/label_input"
+                android:text="@string/manual_input_last_name"/>
+
+            <EditText
+                android:id="@+id/etstudentlastname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/field_input"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RLstudentdob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RLstudentlastname"
+            android:layout_margin="@dimen/margin">
+
+            <TextView
+                android:id="@+id/tvstudentdob"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="@dimen/label_input"
+                android:text="@string/manual_input_dob"/>
+
+            <EditText
+                android:id="@+id/etstudentdob"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/field_input"/>
+
+            <TextView
+                android:id="@+id/tvdobhelp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_xlarge"
+                android:layout_below="@+id/etstudentdob"
+                android:textStyle="italic"
+                android:textSize="@dimen/field_help"
+                android:text="@string/manual_input_dob_help"
+                android:textColor="@color/grey"/>
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
-
-
+    <Button
+        android:id="@+id/btnaddstudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin_large"
+        android:textAlignment="center"
+        android:textSize="@dimen/button_text"
+        android:text="@string/button_add_student"/>
 
 </RelativeLayout>

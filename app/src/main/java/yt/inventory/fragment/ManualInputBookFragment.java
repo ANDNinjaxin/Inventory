@@ -6,12 +6,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import yt.inventory.R;
+
 /**
  * Created by Ninjaxin on 11/3/15.
  */
 public class ManualInputBookFragment extends BaseFragment {
 
 
+
+    public static ManualInputBookFragment newInstance() {
+        //params
+
+        ManualInputBookFragment fragment = new ManualInputBookFragment();
+
+//        Bundle args = new Bundle();
+//        args.putSerializable();
+//        fragment.setArguments(args);
+
+        return fragment;
+    }
 
 
     @Override
@@ -35,7 +49,7 @@ public class ManualInputBookFragment extends BaseFragment {
 
     @Override
     public Integer getLayoutId() {
-        return null;
+        return R.layout.fragment_manual_input_book;
     }
 
     @Override

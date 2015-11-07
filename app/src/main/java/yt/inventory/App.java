@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.util.TypedValue;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,9 +35,6 @@ public class App extends Application {
     private static ArrayList<Student> studentList = new ArrayList<>();
     private static ArrayList<Book> bookList = new ArrayList<>();
     private static ArrayList<BookTransaction> bookTransactionList = new ArrayList<>();
-
-
-
 
 
     @Override
@@ -114,7 +112,7 @@ public class App extends Application {
     }
 
     /**
-     *      Save Data
+     * Save Data
      */
     public static void saveAllData() {
 
@@ -131,7 +129,7 @@ public class App extends Application {
 
         try {
 
-        } catch(Exception e) {
+        } catch (Exception e) {
 
         }
 
@@ -193,16 +191,31 @@ public class App extends Application {
     public static void clearAllCloudData() {
         //TODO wipe app storage data on gdrive
     }
+
     public static boolean isFirstRun() {
         if (pref.getBoolean("firstrun", true)) {
-            return false;
+            return true;
 
         } else {
+            //TODO: enable to for release
             //pref.edit().putBoolean("firstrun", true).commit();
-            return true;
+            return false;
         }
     }
 
+    /**
+     * functions:
+     */
+    public static String resString(int resId) {
+        return App.getContext()
+                .getResources()
+                .getString(resId);
+    }
 
+    public static int dpToInt(int desiredDP) {
+        final int intSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                desiredDP, getMainActivity().getResources().getDisplayMetrics());
+        return intSize;
+    }
 
 }

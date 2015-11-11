@@ -1,10 +1,13 @@
 package yt.inventory;
 
+import android.app.AlertDialog;
 import android.app.Application;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.util.TypedValue;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,11 +39,17 @@ public class App extends Application {
     private static ArrayList<Book> bookList = new ArrayList<>();
     private static ArrayList<BookTransaction> bookTransactionList = new ArrayList<>();
 
+    public final static String[] KBookLevels = {
+            "7A", "6A", "5A", "4A", "3A", "2A",
+            "AI", "AII", "BI", "BII", "CI", "CII",
+            "D", "E", "F", "G", "H", "I", "J", "K", "L"
+    };
+
 
     @Override
     public void onCreate() {
         instance = this;
-        context = instance;
+        context = this.getApplicationContext();
         super.onCreate();
 
     }
@@ -109,6 +118,18 @@ public class App extends Application {
 
     public static void setBookTransactionList(ArrayList<BookTransaction> transList) {
         bookTransactionList = transList;
+    }
+
+    public static void addStudent(Student student) {
+        studentList.add(student);
+    }
+
+    public static void addBook(Book book) {
+        bookList.add(book);
+    }
+
+    public static void addBookTransaction(BookTransaction transaction) {
+        bookTransactionList.add(transaction);
     }
 
     /**
@@ -206,6 +227,24 @@ public class App extends Application {
     /**
      * functions:
      */
+    public static void showToast(String message) {
+        showToast(message, Toast.LENGTH_LONG);
+    }
+
+    public static void showToast(int resourceID) {
+        showToast(resString(resourceID), Toast.LENGTH_LONG);
+    }
+
+    public static void showToast(int resourceID, int duration) {
+        showToast(resString(resourceID), duration);
+    }
+
+    public static void showToast(String message, int duration) {
+        Toast toast = Toast.makeText(instance, message, Toast.LENGTH_LONG);
+        toast.setDuration(duration);
+        toast.show();
+    }
+
     public static String resString(int resId) {
         return App.getContext()
                 .getResources()
@@ -216,6 +255,10 @@ public class App extends Application {
         final int intSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 desiredDP, getMainActivity().getResources().getDisplayMetrics());
         return intSize;
+    }
+
+    public static boolean nonEmptyString(String str) {
+        return !str.trim().isEmpty();
     }
 
 }

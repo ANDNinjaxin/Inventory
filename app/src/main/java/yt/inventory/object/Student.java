@@ -10,7 +10,7 @@ public class Student {
     private int id;
     private String lastName;
     private String firstName;
-    private String dob;
+    private int dob;
     private boolean status;
     private int strikes;
     private ArrayList<BookTransaction> studentsBookHistory;
@@ -19,7 +19,7 @@ public class Student {
         this.id = -1;
         this.lastName = "";
         this.firstName = "";
-        this.dob = "";
+        this.dob = -1;
         this.status = false;
         this.strikes = 0;
         this.studentsBookHistory = new ArrayList<>();
@@ -28,7 +28,7 @@ public class Student {
     public Student(int id,
                    String firstname,
                    String lastname,
-                   String dob) {
+                   int dob) {
 
         this.id = id;
         this.firstName = firstname;
@@ -39,6 +39,18 @@ public class Student {
         this.studentsBookHistory = new ArrayList<>();
     }
 
+    public Student(String firstname,
+                   String lastname,
+                   int dob) {
+
+        this.id = -1;
+        this.firstName = firstname;
+        this.lastName = lastname;
+        this.dob = dob;
+        this.status = true;
+        this.strikes = 0;
+        this.studentsBookHistory = new ArrayList<>();
+    }
 
     public int getId() {
         return id;
@@ -64,11 +76,11 @@ public class Student {
         this.firstName = firstName;
     }
 
-    public String getDob() {
+    public int getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(int dob) {
         this.dob = dob;
     }
 

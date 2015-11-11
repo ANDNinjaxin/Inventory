@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_margin="@dimen/margin">
+            android:layout_margin="@dimen/margin_small">
 
             <TextView
                 android:id="@+id/tvstudentid"
@@ -35,6 +35,7 @@
                 android:layout_height="@dimen/field_input_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:gravity="center"
                 android:textSize="@dimen/field_input"/>
 
         </RelativeLayout>
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/RLstudentid"
-            android:layout_margin="@dimen/margin">
+            android:layout_margin="@dimen/margin_small">
 
             <TextView
                 android:id="@+id/tvstudentfirstname"
@@ -62,6 +63,7 @@
                 android:layout_height="@dimen/field_input_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:gravity="center"
                 android:textSize="@dimen/field_input"/>
 
         </RelativeLayout>
@@ -71,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/RLstudentfirstname"
-            android:layout_margin="@dimen/margin">
+            android:layout_margin="@dimen/margin_small">
 
             <TextView
                 android:id="@+id/tvstudentlastname"
@@ -89,6 +91,7 @@
                 android:layout_height="@dimen/field_input_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:gravity="center"
                 android:textSize="@dimen/field_input"/>
 
         </RelativeLayout>
@@ -98,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/RLstudentlastname"
-            android:layout_margin="@dimen/margin">
+            android:layout_margin="@dimen/margin_small">
 
             <TextView
                 android:id="@+id/tvstudentdob"
@@ -115,6 +118,7 @@
                 android:layout_width="@dimen/field_input_width"
                 android:layout_height="@dimen/field_input_height"
                 android:layout_alignParentRight="true"
+                android:gravity="center"
                 android:textSize="@dimen/field_input"/>
 
             <TextView
@@ -139,7 +143,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/margin_large"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textSize="@dimen/button_text"
         android:text="@string/button_add_student"/>
 

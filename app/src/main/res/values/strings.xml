@@ -13,6 +13,31 @@
     <string name="student">Student</string>
     <string name="book">Book</string>
 
+    <string-array name="kumon_book_levels">
+        <item>7A</item>
+        <item>6A</item>
+        <item>5A</item>
+        <item>4A</item>
+        <item>3A</item>
+        <item>2A</item>
+        <item>AI</item>
+        <item>AII</item>
+        <item>BI</item>
+        <item>BII</item>
+        <item>CI</item>
+        <item>CII</item>
+        <item>D</item>
+        <item>E</item>
+        <item>F</item>
+        <item>G</item>
+        <item>H</item>
+        <item>I</item>
+        <item>J</item>
+        <item>K</item>
+        <item>L</item>
+
+    </string-array>
+
     <string name="fragmentmanualinput">Manual Input</string>
 
     <string name="manual_input_student_id">Student ID: </string>
@@ -31,6 +56,12 @@
     <string name="manual_input_book_available">Available: </string>
     <string name="manual_input_book_barcode_number">Barcode #: </string>
 
+    <string name="manual_input_student_success">Successfully added student!</string>
+    <string name="manual_input_book_success">Successfully added book!</string>
+
+    <string name="error_toast_required_fields">Please complete the required fields!</string>
+
+    <string name="button_look_up_book">Get Book Info</string>
     <string name="button_add_student">ADD STUDENT</string>
     <string name="button_add_book">ADD BOOK</string>
 

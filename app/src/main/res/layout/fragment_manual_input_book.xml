@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_margin="@dimen/margin">
+            android:layout_margin="@dimen/margin_small">
 
             <TextView
                 android:id="@+id/tvbooklevel"
@@ -29,12 +29,13 @@
                 android:textSize="@dimen/label_input"
                 android:text="@string/manual_input_book_level" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/etbooklevel"
                 android:layout_width="@dimen/field_input_width"
                 android:layout_height="@dimen/field_input_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:gravity="center"
                 android:textSize="@dimen/field_input"/>
 
         </RelativeLayout>
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/RLbooklevel"
-            android:layout_margin="@dimen/margin">
+            android:layout_margin="@dimen/margin_small">
 
             <TextView
                 android:id="@+id/tvbooknumber"
@@ -62,7 +63,25 @@
                 android:layout_height="@dimen/field_input_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:gravity="center"
                 android:textSize="@dimen/field_input"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RLBookSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RLbooknumber"
+            android:layout_margin="@dimen/margin_small">
+
+            <Button
+                android:id="@+id/btngetinfo"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:text="@string/button_look_up_book"/>
 
         </RelativeLayout>
 
@@ -71,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/RLbooknumber"
-            android:layout_margin="@dimen/margin">
+            android:layout_margin="@dimen/margin_small">
 
             <TextView
                 android:id="@+id/tvbooktitle"
@@ -89,6 +108,7 @@
                 android:layout_height="@dimen/field_input_height"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
+                android:gravity="center"
                 android:textSize="@dimen/field_input"/>
 
         </RelativeLayout>
@@ -98,7 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/RLbooktitle"
-            android:layout_margin="@dimen/margin">
+            android:layout_margin="@dimen/margin_small">
 
             <TextView
                 android:id="@+id/tvbookauthor"
@@ -115,6 +135,7 @@
                 android:layout_width="@dimen/field_input_width"
                 android:layout_height="@dimen/field_input_height"
                 android:layout_alignParentRight="true"
+                android:gravity="center"
                 android:textSize="@dimen/field_input"/>
 
         </RelativeLayout>
@@ -125,7 +146,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/RLbookauthor"
-            android:layout_margin="@dimen/margin">
+            android:layout_margin="@dimen/margin_small">
 
             <TextView
                 android:id="@+id/tvbookavailable"
@@ -137,11 +158,13 @@
                 android:textSize="@dimen/label_input"
                 android:text="@string/manual_input_book_available"/>
 
-            <EditText
+            <CheckBox
                 android:id="@+id/etbookavailable"
-                android:layout_width="@dimen/field_input_width"
+                android:layout_width="@dimen/field_input_height"
                 android:layout_height="@dimen/field_input_height"
                 android:layout_alignParentRight="true"
+                android:checked="true"
+                android:gravity="center"
                 android:textSize="@dimen/field_input"/>
 
         </RelativeLayout>
@@ -151,7 +174,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/RLbookavailable"
-            android:layout_margin="@dimen/margin">
+            android:layout_margin="@dimen/margin_small">
 
             <TextView
                 android:id="@+id/tvbookbarcode"
@@ -163,12 +186,14 @@
                 android:textSize="@dimen/label_input"
                 android:text="@string/manual_input_book_barcode_number"/>
 
-            <EditText
+            <TextView
                 android:id="@+id/etbookbarcode"
                 android:layout_width="@dimen/field_input_width"
                 android:layout_height="@dimen/field_input_height"
                 android:layout_alignParentRight="true"
-                android:textSize="@dimen/field_input"/>
+                android:gravity="center"
+                android:textSize="@dimen/field_input"
+                android:textStyle="bold" />
 
         </RelativeLayout>
 

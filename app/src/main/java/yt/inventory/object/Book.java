@@ -10,6 +10,8 @@ public class Book {
     private int id;
     private String bookLevel;
     private int bookNumber;
+    private String bookTitle;
+    private String bookAuthor;
     private boolean isAvailable;
     private ArrayList<String> checkoutHistory;
 
@@ -19,6 +21,8 @@ public class Book {
         this.id = -1;
         this.bookLevel = "";
         this.bookNumber = -1;
+        this.bookTitle = "";
+        this.bookAuthor = "";
         this.isAvailable = true;
         this.checkoutHistory = new ArrayList<>();
     }
@@ -29,11 +33,15 @@ public class Book {
     public Book(int id,
                 String bookLevel,
                 int bookNumber,
+                String bookTitle,
+                String bookAuthor,
                 boolean isAvailable) {
 
         this.id = id;
         this.bookLevel = bookLevel;
         this.bookNumber = bookNumber;
+        this.bookTitle = bookTitle;
+        this.bookAuthor = bookAuthor;
         this.isAvailable = isAvailable;
         this.checkoutHistory = new ArrayList<>();
     }
@@ -59,6 +67,14 @@ public class Book {
         return bookNumber;
     }
 
+    public String getBookTitle() {
+        return bookTitle;
+    }
+
+    public String getBookAuthor() {
+        return bookAuthor;
+    }
+
     public void setBookNumber(int bookNumber) {
         this.bookNumber = bookNumber;
     }
@@ -69,6 +85,14 @@ public class Book {
 
     public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
     }
 
     public ArrayList<String> getCheckoutHistory() {

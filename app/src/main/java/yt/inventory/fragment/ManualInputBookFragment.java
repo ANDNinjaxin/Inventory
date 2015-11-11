@@ -12,6 +12,8 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import yt.inventory.App;
 import yt.inventory.R;
 
@@ -50,8 +52,24 @@ public class ManualInputBookFragment extends BaseFragment {
     private TextView etbookbarcode;
     private CheckBox cbbookavailable;
 
+    private int sBookID = -1;
+    private String sBookLevel = "";
+    private int sBookNumber = -1;
+    private String sBookTitle = "";
+    private String sBookAuthor = "";
+    private boolean sBookAvailable = false;
+    private ArrayList<String> sHistory = new ArrayList<>();
 
 
+    private void resetCache() {
+        sBookID = -1;
+        sBookLevel = "";
+        sBookNumber = -1;
+        sBookTitle = "";
+        sBookAuthor = "";
+        sBookAvailable = false;
+        sHistory.clear();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -106,8 +124,12 @@ public class ManualInputBookFragment extends BaseFragment {
         btnGetInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!etbooklevel.getSelectedItem().toString().trim().isEmpty()
-                        && nonEmpty(etbooknumber)) {
+                if (!App.isEmpty(etbooklevel.getSelectedItem())
+                        && App.nonZero(etbooknumber)) {
+                    resetCache();
+                    sBookLevel = App.getString(etbooklevel.getSelectedItem());
+                    sBookNumber = App.getInt(etbooknumber);
+                    getBookInfo();
 
                 } else {
                     App.showToast(R.string.error_toast_required_fields);
@@ -118,10 +140,10 @@ public class ManualInputBookFragment extends BaseFragment {
         btnAddBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean validBook = (etbooklevel.)
+                boolean validBook = (!App.isEmpty(etbooklevel.getSelectedItem()))
                             && nonEmpty(etbooknumber)
                             && nonEmpty(etbooktitle)
-                            && nonEmpty(etbookauthor));
+                            && nonEmpty(etbookauthor);
                 if (validBook) {
                     //need valid book number (int)
                 }

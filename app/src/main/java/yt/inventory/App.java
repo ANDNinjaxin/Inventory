@@ -261,4 +261,40 @@ public class App extends Application {
         return !str.trim().isEmpty();
     }
 
+    public static String getString(Object o) {
+        String str = o.toString().trim();
+        return str;
+    }
+
+    public static boolean isEmpty(Object o) {
+        return getString(o).isEmpty();
+    }
+
+    public static boolean nonZero(Object o) {
+        try {
+            int temp = Integer.parseInt(o.toString());
+            if (temp > 0) {
+                return true;
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static int getInt(Object o) {
+        try {
+            int temp = Integer.parseInt(o.toString());
+            if (temp > 0) {
+                return temp;
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+
+    }
+
 }

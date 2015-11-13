@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.util.TypedValue;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -262,17 +264,39 @@ public class App extends Application {
     }
 
     public static String getString(Object o) {
-        String str = o.toString().trim();
-        return str;
+        if (o != null) {
+            String str = o.toString().trim();
+            return str;
+        } else {
+            return "";
+        }
     }
 
     public static boolean isEmpty(Object o) {
-        return getString(o).isEmpty();
+        if (o != null) {
+            return getString(o).isEmpty();
+        } else {
+            return true;
+        }
     }
 
     public static boolean nonZero(Object o) {
+        if (o != null) {
+            try {
+                int temp = Integer.parseInt(o.toString());
+                if (temp > 0) {
+                    return true;
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public static boolean nonZero(EditText o) {
         try {
-            int temp = Integer.parseInt(o.toString());
+            int temp = Integer.parseInt(o.getText().toString());
             if (temp > 0) {
                 return true;
             }
@@ -284,8 +308,23 @@ public class App extends Application {
     }
 
     public static int getInt(Object o) {
+        if (o != null) {
+            try {
+                int temp = Integer.parseInt(o.toString());
+                if (temp > 0) {
+                    return temp;
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return -1;
+
+    }
+
+    public static int getInt(EditText o) {
         try {
-            int temp = Integer.parseInt(o.toString());
+            int temp = Integer.parseInt(o.getText().toString());
             if (temp > 0) {
                 return temp;
             }
@@ -297,4 +336,17 @@ public class App extends Application {
 
     }
 
+    public static int getInt(TextView o) {
+        try {
+            int temp = Integer.parseInt(o.getText().toString());
+            if (temp > 0) {
+                return temp;
+            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+
+    }
 }

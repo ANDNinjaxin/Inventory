@@ -5,17 +5,20 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import yt.inventory.App;
 import yt.inventory.R;
+import yt.inventory.object.Book;
 
 /**
  * Created by Ninjaxin on 11/3/15.
@@ -103,20 +106,25 @@ public class ManualInputBookFragment extends BaseFragment {
         etbookbarcode = (TextView) view.findViewById(R.id.etbookbarcode);
 
 
-        initPreloadUI(view);
+        initPreloadUI();
         initListeners(view);
         return view;
     }
 
-    private void initPreloadUI(View view) {
+    private void initPreloadUI() {
+        RLbooksearch.setVisibility(View.VISIBLE);
         RLbooktitle.setVisibility(View.GONE);
         RLbookauthor.setVisibility(View.GONE);
         RLbookavailable.setVisibility(View.GONE);
+        cbbookavailable.setChecked(true);
         RLbookbarcode.setVisibility(View.GONE);
         btnAddBook.setVisibility(View.GONE);
-        cbbookavailable.setChecked(true);
 
-
+        ArrayAdapter spinnerAdapter = ArrayAdapter
+                .createFromResource(App.getContext(), R.array.kumon_book_levels,
+                        android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        etbooklevel.setAdapter(spinnerAdapter);
 
     }
 
@@ -140,22 +148,72 @@ public class ManualInputBookFragment extends BaseFragment {
         btnAddBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean validBook = (!App.isEmpty(etbooklevel.getSelectedItem()))
-                            && nonEmpty(etbooknumber)
-                            && nonEmpty(etbooktitle)
-                            && nonEmpty(etbookauthor);
-                if (validBook) {
-                    //need valid book number (int)
-                }
+
             }
         });
 
     }
 
     private void getBookInfo() {
+        //getBookDBRequest();
+
+        RLbooksearch.setVisibility(View.GONE);
+        RLbooktitle.setVisibility(View.VISIBLE);
+        RLbookauthor.setVisibility(View.VISIBLE);
+        RLbookavailable.setVisibility(View.VISIBLE);
+        RLbookbarcode.setVisibility(View.VISIBLE);
 
     }
 
+    //Pull from public ISBN DB
+    private void getBookDBRequest() {
+
+    }
+
+    private void addBook() {
+        //TODO: Set id = barcode;
+        //TODO: Create unique barcode generator;
+
+        boolean validBook = (!App.isEmpty(etbooklevel.getSelectedItem()))
+                && nonEmpty(etbooknumber)
+                && nonEmpty(etbooktitle)
+                && nonEmpty(etbookauthor);
+        if (validBook) {
+            //TODO: need valid book number (int)
+
+            Book book;
+            book = new Book(sBookID, sBookLevel, sBookNumber, sBookTitle, sBookAuthor, sBookAvailable);
+            App.addBook(book);
+
+        }
+    }
+
+    private void getFields() {
+        sBookID = App.getInt(etbookbarcode);
+        sBookLevel = etbooklevel.getSelectedItem().toString();
+        sBookNumber = App.getInt(etbooknumber);
+        sBookTitle = etbooktitle.getText().toString();
+        sBookAuthor = etbookauthor.getText().toString();
+
+        if (cbbookavailable.isChecked()) {
+            sBookAvailable = true;
+        } else {
+            sBookAvailable = false;
+        }
+
+    }
+
+    private void clearFields() {
+        resetCache();
+        //TODO: spinner selection to empty;
+        etbooknumber.setText("");
+        etbooktitle.setText("");
+        etbookauthor.setText("");
+        cbbookavailable.setChecked(true);
+        etbookbarcode.setText("");
+
+        initPreloadUI();
+    }
 
     private boolean nonEmpty(EditText temp) {
         if (temp.getText().toString().isEmpty()) {

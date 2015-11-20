@@ -253,6 +253,10 @@ public class App extends Application {
                 .getString(resId);
     }
 
+    public static Integer resColor(int res) {
+        return getContext().getResources().getColor(res);
+    }
+
     public static int dpToInt(int desiredDP) {
         final int intSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 desiredDP, getMainActivity().getResources().getDisplayMetrics());

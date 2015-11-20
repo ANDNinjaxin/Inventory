@@ -36,6 +36,7 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:gravity="center"
+                android:inputType="number"
                 android:textSize="@dimen/field_input"/>
 
         </RelativeLayout>
@@ -119,6 +120,7 @@
                 android:layout_height="@dimen/field_input_height"
                 android:layout_alignParentRight="true"
                 android:gravity="center"
+                android:inputType="number"
                 android:textSize="@dimen/field_input"/>
 
             <TextView

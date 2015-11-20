@@ -122,9 +122,12 @@ public class ManualInputBookFragment extends BaseFragment {
 
         ArrayAdapter spinnerAdapter = ArrayAdapter
                 .createFromResource(App.getContext(), R.array.kumon_book_levels,
-                        android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        R.layout.spinner_item_book_level);
+
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_item_book_level);
+
         etbooklevel.setAdapter(spinnerAdapter);
+        etbooklevel.setBackgroundColor(App.resColor(R.color.tint_light_gray));
 
     }
 

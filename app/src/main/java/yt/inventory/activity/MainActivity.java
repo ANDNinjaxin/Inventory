@@ -1,7 +1,9 @@
 package yt.inventory.activity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,6 +25,9 @@ public class MainActivity extends ActionBarActivity {
 
     public static final String TAG = MainActivity.class.getCanonicalName();
     public static final String TAG_MAIN_FRAGMENT = TAG + ".MainContainer";
+
+    public static final int SCAN_REQUEST_CODE = 0;
+
 
     protected FragmentManager fragmentManager;
 
@@ -96,6 +101,58 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+    /**
+     * Scanner options:
+     */
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+
+//        hideMenuIfShowing();
+//
+//        if (requestCode == SCAN_REQUEST_CODE) {
+//            onScanResult(resultCode, data);
+//            return;
+//        }
+//
+//        if (requestCode == SHARE_REQUEST_CODE) {
+//            issueSharedProductReward();
+//            return;
+//        }
+//
+//        switch (resultCode) {
+//            default:
+//                break;
+//            case RETURN_TO_CHECKOUT:
+//                goToBag();
+//                break;
+//            case HOME_RESULT_CODE:
+//                goToHome();
+//                break;
+//            case DASHBOARD_RESULT_CODE:
+//                replaceFragment(new RewardsDashBoardFragment());
+//                break;
+//            case SHOP_RESULT_CODE:
+//                replaceFragment(ShopFragment.newInstance(""));
+//                break;
+//        }
+
+    }
+
+    private void onScanResult(int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        String contents = data.getStringExtra(SimpleScannerActivity.BARCODE_CONTENTS);
+
+        //TODO: DO SOMETHING WITH SCANNED INFO
+    }
+
+    public void scanBarcode() {
+        Intent i = new Intent(this, SimpleScannerActivity.class);
+        startActivityForResult(i, SCAN_REQUEST_CODE);
+    }
 
 
 

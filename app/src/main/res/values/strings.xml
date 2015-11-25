@@ -14,6 +14,7 @@
     <string name="book">Book</string>
 
     <string-array name="kumon_book_levels">
+
         <item>7A</item>
         <item>6A</item>
         <item>5A</item>
@@ -26,9 +27,12 @@
         <item>BII</item>
         <item>CI</item>
         <item>CII</item>
-        <item>D</item>
-        <item>E</item>
-        <item>F</item>
+        <item>DI</item>
+        <item>DII</item>
+        <item>EI</item>
+        <item>EII</item>
+        <item>FI</item>
+        <item>FII</item>
         <item>G</item>
         <item>H</item>
         <item>I</item>
@@ -56,10 +60,15 @@
     <string name="manual_input_book_available">Available: </string>
     <string name="manual_input_book_barcode_number">Barcode #: </string>
 
+    <string name="manual_input_scan">Scan Barcode: </string>
+    <string name="manual_input_button_scan">Scan</string>
+    <string name="manual_input_scan_or"> OR </string>
+
     <string name="manual_input_student_success">Successfully added student!</string>
     <string name="manual_input_book_success">Successfully added book!</string>
 
     <string name="error_toast_required_fields">Please complete the required fields!</string>
+    <string name="error_toast_scan_error">Check Barcode! Invalid data!</string>
 
     <string name="button_look_up_book">Get Book Info</string>
     <string name="button_add_student">ADD STUDENT</string>

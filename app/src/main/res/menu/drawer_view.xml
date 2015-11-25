@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home_dashboard"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_import_manual"
+            android:title="Manual Import" />
+        <item
+            android:id="@+id/nav_batch_import"
+            android:title="Batch Import" />
+        <item
+            android:id="@+id/nav_admin_override"
+            android:title="Admin" />
+    </group>
+</menu>

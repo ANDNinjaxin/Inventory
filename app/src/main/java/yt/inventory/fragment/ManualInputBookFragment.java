@@ -1,5 +1,7 @@
 package yt.inventory.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -18,12 +20,17 @@ import java.util.ArrayList;
 
 import yt.inventory.App;
 import yt.inventory.R;
+import yt.inventory.activity.SimpleScannerActivity;
+import yt.inventory.logic.BookLogic;
 import yt.inventory.object.Book;
 
 /**
  * Created by Ninjaxin on 11/3/15.
  */
 public class ManualInputBookFragment extends BaseFragment {
+
+    public static final int SCAN_REQUEST_CODE = 0;
+
 
     public static ManualInputBookFragment newInstance() {
         //params
@@ -41,35 +48,28 @@ public class ManualInputBookFragment extends BaseFragment {
     private View view;
     private RelativeLayout RLbooklevel,
                             RLbooknumber,
-                            RLbooksearch,
-                            RLbooktitle,
-                            RLbookauthor,
                             RLbookavailable,
                             RLbookbarcode;
-    private Button btnGetInfo,
+    private Button btnScan,
                     btnAddBook;
-    private EditText etbooknumber,
-                    etbooktitle,
-                    etbookauthor;
+    private EditText etbooknumber;
     private Spinner etbooklevel;
     private TextView etbookbarcode;
     private CheckBox cbbookavailable;
 
-    private int sBookID = -1;
+    private String sBookID = "";
     private String sBookLevel = "";
-    private int sBookNumber = -1;
-    private String sBookTitle = "";
-    private String sBookAuthor = "";
+    private String sBookNumber = "";
     private boolean sBookAvailable = false;
     private ArrayList<String> sHistory = new ArrayList<>();
 
+    private ArrayAdapter spinnerAdapter;
+
 
     private void resetCache() {
-        sBookID = -1;
+        sBookID = "";
         sBookLevel = "";
-        sBookNumber = -1;
-        sBookTitle = "";
-        sBookAuthor = "";
+        sBookNumber = "";
         sBookAvailable = false;
         sHistory.clear();
     }
@@ -89,19 +89,14 @@ public class ManualInputBookFragment extends BaseFragment {
 
         RLbooklevel = (RelativeLayout) view.findViewById(R.id.RLbooklevel);
         RLbooknumber = (RelativeLayout) view.findViewById(R.id.RLbooknumber);
-        RLbooksearch = (RelativeLayout) view.findViewById(R.id.RLBookSearch);
-        RLbooktitle = (RelativeLayout) view.findViewById(R.id.RLbooktitle);
-        RLbookauthor = (RelativeLayout) view.findViewById(R.id.RLbookauthor);
         RLbookavailable = (RelativeLayout) view.findViewById(R.id.RLbookavailable);
         RLbookbarcode = (RelativeLayout) view.findViewById(R.id.RLbookbarcode);
 
-        btnGetInfo = (Button) view.findViewById(R.id.btngetinfo);
+        btnScan = (Button) view.findViewById(R.id.btnscan);
         btnAddBook = (Button) view.findViewById(R.id.btnaddbook);
 
         etbooklevel = (Spinner) view.findViewById(R.id.etbooklevel);
         etbooknumber = (EditText) view.findViewById(R.id.etbooknumber);
-        etbooktitle = (EditText) view.findViewById(R.id.etbooktitle);
-        etbookauthor = (EditText) view.findViewById(R.id.etbookauthor);
         cbbookavailable = (CheckBox) view.findViewById(R.id.etbookavailable);
         etbookbarcode = (TextView) view.findViewById(R.id.etbookbarcode);
 
@@ -112,15 +107,9 @@ public class ManualInputBookFragment extends BaseFragment {
     }
 
     private void initPreloadUI() {
-        RLbooksearch.setVisibility(View.VISIBLE);
-        RLbooktitle.setVisibility(View.GONE);
-        RLbookauthor.setVisibility(View.GONE);
-        RLbookavailable.setVisibility(View.GONE);
         cbbookavailable.setChecked(true);
-        RLbookbarcode.setVisibility(View.GONE);
-        btnAddBook.setVisibility(View.GONE);
 
-        ArrayAdapter spinnerAdapter = ArrayAdapter
+        spinnerAdapter = ArrayAdapter
                 .createFromResource(App.getContext(), R.array.kumon_book_levels,
                         R.layout.spinner_item_book_level);
 
@@ -132,19 +121,10 @@ public class ManualInputBookFragment extends BaseFragment {
     }
 
     private void initListeners(View view) {
-        btnGetInfo.setOnClickListener(new View.OnClickListener() {
+        btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!App.isEmpty(etbooklevel.getSelectedItem())
-                        && App.nonZero(etbooknumber)) {
-                    resetCache();
-                    sBookLevel = App.getString(etbooklevel.getSelectedItem());
-                    sBookNumber = App.getInt(etbooknumber);
-                    getBookInfo();
-
-                } else {
-                    App.showToast(R.string.error_toast_required_fields);
-                }
+                scanBarcode();
             }
         });
 
@@ -157,16 +137,6 @@ public class ManualInputBookFragment extends BaseFragment {
 
     }
 
-    private void getBookInfo() {
-        //getBookDBRequest();
-
-        RLbooksearch.setVisibility(View.GONE);
-        RLbooktitle.setVisibility(View.VISIBLE);
-        RLbookauthor.setVisibility(View.VISIBLE);
-        RLbookavailable.setVisibility(View.VISIBLE);
-        RLbookbarcode.setVisibility(View.VISIBLE);
-
-    }
 
     //Pull from public ISBN DB
     private void getBookDBRequest() {
@@ -178,25 +148,21 @@ public class ManualInputBookFragment extends BaseFragment {
         //TODO: Create unique barcode generator;
 
         boolean validBook = (!App.isEmpty(etbooklevel.getSelectedItem()))
-                && nonEmpty(etbooknumber)
-                && nonEmpty(etbooktitle)
-                && nonEmpty(etbookauthor);
+                && nonEmpty(etbooknumber);
         if (validBook) {
             //TODO: need valid book number (int)
 
             Book book;
-            book = new Book(sBookID, sBookLevel, sBookNumber, sBookTitle, sBookAuthor, sBookAvailable);
+            book = new Book(sBookID, sBookLevel, sBookNumber, sBookAvailable);
             App.addBook(book);
 
         }
     }
 
     private void getFields() {
-        sBookID = App.getInt(etbookbarcode);
+        sBookID = etbookbarcode.getText().toString();
         sBookLevel = etbooklevel.getSelectedItem().toString();
-        sBookNumber = App.getInt(etbooknumber);
-        sBookTitle = etbooktitle.getText().toString();
-        sBookAuthor = etbookauthor.getText().toString();
+        sBookNumber = App.getString(etbooknumber);
 
         if (cbbookavailable.isChecked()) {
             sBookAvailable = true;
@@ -210,8 +176,6 @@ public class ManualInputBookFragment extends BaseFragment {
         resetCache();
         //TODO: spinner selection to empty;
         etbooknumber.setText("");
-        etbooktitle.setText("");
-        etbookauthor.setText("");
         cbbookavailable.setChecked(true);
         etbookbarcode.setText("");
 
@@ -223,6 +187,78 @@ public class ManualInputBookFragment extends BaseFragment {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Logic    Welcome to Tutorialspoint.com"
+     */
+
+    private String retrieveLevel(String scanned) {
+        return BookLogic.identifyLevel(scanned);
+    }
+
+    private String retrieveBookID(String scanned) {
+        return BookLogic.identifyBookID(scanned);
+    }
+
+    private void scanBarcode() {
+        Intent i = new Intent(App.getContext(), SimpleScannerActivity.class);
+        startActivityForResult(i, SCAN_REQUEST_CODE);
+//        startActivityForResult(i, 3);
+    }
+
+    @Override
+    public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SCAN_REQUEST_CODE) {
+            onScanResult(resultCode, data);
+            return;
+        }
+    }
+
+    private void onScanResult(int resultCode, Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        String contents = data.getStringExtra(SimpleScannerActivity.BARCODE_CONTENTS);
+
+        if ( (contents == null) || (contents.isEmpty()) ) {
+            return;
+        }
+
+        String tempLevel = BookLogic.identifyLevel(contents);
+        String tempBookID = BookLogic.identifyBookID(contents);
+
+        if (contents.isEmpty() || (contents.trim().length() < 4) ) {
+            App.showToast(getString(R.string.error_toast_scan_error));
+            return;
+        }
+
+        boolean validLevel = false;
+        String[] kbooklevels = App.getContext().getResources().getStringArray(R.array.kumon_book_levels);
+        for (int i = 0; i < kbooklevels.length; i++) {
+            if (kbooklevels[i].equalsIgnoreCase(tempLevel)) {
+                validLevel = true;
+                break;
+            }
+        }
+
+        if (validLevel) {
+            sBookLevel = tempLevel;
+            sBookNumber = tempBookID;
+            sBookID = contents;
+
+            int spinnerPosition = spinnerAdapter.getPosition(sBookLevel);
+            etbooklevel.setSelection(spinnerPosition);
+            etbooknumber.setText(sBookNumber);
+            etbookbarcode.setText(contents.trim());
+
+        } else {
+            App.showToast("Incorrect Data!");
+        }
+
     }
 
     @Override

@@ -276,6 +276,24 @@ public class App extends Application {
         }
     }
 
+    public static String getString(EditText o) {
+        if (o != null) {
+            String str = o.getText().toString().trim();
+            return str;
+        } else {
+            return "";
+        }
+    }
+
+    public static String getString(TextView o) {
+        if (o != null) {
+            String str = o.getText().toString().trim();
+            return str;
+        } else {
+            return "";
+        }
+    }
+
     public static boolean isEmpty(Object o) {
         if (o != null) {
             return getString(o).isEmpty();

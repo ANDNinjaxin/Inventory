@@ -10,8 +10,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import yt.inventory.App;
 import yt.inventory.R;
@@ -105,49 +107,6 @@ public class MainActivity extends ActionBarActivity {
      * Scanner options:
      */
 
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-
-//        hideMenuIfShowing();
-//
-//        if (requestCode == SCAN_REQUEST_CODE) {
-//            onScanResult(resultCode, data);
-//            return;
-//        }
-//
-//        if (requestCode == SHARE_REQUEST_CODE) {
-//            issueSharedProductReward();
-//            return;
-//        }
-//
-//        switch (resultCode) {
-//            default:
-//                break;
-//            case RETURN_TO_CHECKOUT:
-//                goToBag();
-//                break;
-//            case HOME_RESULT_CODE:
-//                goToHome();
-//                break;
-//            case DASHBOARD_RESULT_CODE:
-//                replaceFragment(new RewardsDashBoardFragment());
-//                break;
-//            case SHOP_RESULT_CODE:
-//                replaceFragment(ShopFragment.newInstance(""));
-//                break;
-//        }
-
-    }
-
-    private void onScanResult(int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK) {
-            return;
-        }
-
-        String contents = data.getStringExtra(SimpleScannerActivity.BARCODE_CONTENTS);
-
-        //TODO: DO SOMETHING WITH SCANNED INFO
-    }
 
     public void scanBarcode() {
         Intent i = new Intent(this, SimpleScannerActivity.class);

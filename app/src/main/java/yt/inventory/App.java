@@ -30,6 +30,11 @@ import yt.inventory.object.Student;
  */
 public class App extends Application {
 
+    public static final int UNTAGGED_STUDENT_ID = 0;
+    public static final int ERROR_STUDENT_ID = -1;
+
+    public static final String INTERNAL_FILE_NAME = "studentlist.xls";
+
     private static App instance;
     private static Context context;
     private static MainActivity mainActivity;
@@ -40,6 +45,8 @@ public class App extends Application {
     private static ArrayList<Student> studentList = new ArrayList<>();
     private static ArrayList<Book> bookList = new ArrayList<>();
     private static ArrayList<BookTransaction> bookTransactionList = new ArrayList<>();
+
+
 
     public final static String[] KBookLevels = {
             "7A", "6A", "5A", "4A", "3A", "2A",

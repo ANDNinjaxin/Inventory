@@ -5,8 +5,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import yt.inventory.App;
 import yt.inventory.R;
@@ -36,11 +41,13 @@ public class ManualInputStudentFragment extends BaseFragment {
                     etLastName,
                     etDOB;
 
-    private int sID = -1;
+    private String sID = "";
     private String sFirstName = "";
     private String sLastName = "";
-    private int sDOB = -1;
+    private String sDOB = "";
 
+    private Spinner spinner;
+    private ArrayAdapter<String> adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +69,20 @@ public class ManualInputStudentFragment extends BaseFragment {
         etFirstName = (EditText) view.findViewById(R.id.etstudentfirstname);
         etLastName = (EditText) view.findViewById(R.id.etstudentlastname);
         etDOB = (EditText) view.findViewById(R.id.etstudentdob);
+
+        spinner = (Spinner) view.findViewById(R.id.spinnerstudents);
+        List<String> studs = new ArrayList<String>();
+        if (studs != null) {
+            studs.clear();
+        }
+        for (Student student: App.getStudentList()) {
+            studs.add(student.getLastName() + ", " + student.getFirstName());
+        }
+
+        adapter = new ArrayAdapter<String>
+                (App.getContext(), R.layout.spinner_item_book_level, studs);
+        adapter.setDropDownViewResource(R.layout.spinner_item_book_level);
+        spinner.setAdapter(adapter);
 
         setupListeners(view);
 
@@ -132,9 +153,9 @@ public class ManualInputStudentFragment extends BaseFragment {
             String dobYear = cacheDOB.substring(4, 7);
             cacheDOB = "";
             cacheDOB = dobYear + dobMonth + dobDay;
-            sDOB = Integer.parseInt(cacheDOB);
+            sDOB = cacheDOB;
 
-            if ( (sDOB > 10000000) || (sDOB < 99999999) ) {
+            if ( (tempDOB > 10000000) || (tempDOB < 99999999) ) {
                 return true;
             } else {
                 App.showToast("Invalid Birthdate!");
@@ -151,10 +172,10 @@ public class ManualInputStudentFragment extends BaseFragment {
     }
 
     private void resetCacheVariables() {
-        sID = -1;
+        sID = "";
         sFirstName = "";
         sLastName = "";
-        sDOB = -1;
+        sDOB = "";
     }
 
     @Override

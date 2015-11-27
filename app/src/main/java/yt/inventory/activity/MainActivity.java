@@ -20,6 +20,7 @@ import yt.inventory.R;
 import yt.inventory.fragment.HomeFragment;
 import yt.inventory.fragment.ImportDataFragment;
 import yt.inventory.fragment.ManualInputDataFragment;
+import yt.inventory.utility.ReadExcelFile;
 import yt.inventory.utility.StarterRoutine;
 
 
@@ -47,6 +48,8 @@ public class MainActivity extends ActionBarActivity {
         App.initialize();
 
         if (App.isFirstRun()) {
+
+            ReadExcelFile.readFile(this, App.INTERNAL_FILE_NAME);
             gotoManualImportData();
             //startupRoutine();
 

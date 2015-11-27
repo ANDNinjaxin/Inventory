@@ -7,28 +7,28 @@ import java.util.ArrayList;
  */
 public class Student {
 
-    private int id;
+    private String id;
     private String lastName;
     private String firstName;
-    private int dob;
+    private String dob;
     private boolean status;
     private int strikes;
     private ArrayList<BookTransaction> studentsBookHistory;
 
     public Student() {
-        this.id = -1;
+        this.id = "";
         this.lastName = "";
         this.firstName = "";
-        this.dob = -1;
+        this.dob = "";
         this.status = false;
         this.strikes = 0;
         this.studentsBookHistory = new ArrayList<>();
     }
 
-    public Student(int id,
+    public Student(String id,
                    String firstname,
                    String lastname,
-                   int dob) {
+                   String dob) {
 
         this.id = id;
         this.firstName = firstname;
@@ -41,9 +41,9 @@ public class Student {
 
     public Student(String firstname,
                    String lastname,
-                   int dob) {
+                   String dob) {
 
-        this.id = -1;
+        this.id = "";
         this.firstName = firstname;
         this.lastName = lastname;
         this.dob = dob;
@@ -52,11 +52,11 @@ public class Student {
         this.studentsBookHistory = new ArrayList<>();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -76,11 +76,11 @@ public class Student {
         this.firstName = firstName;
     }
 
-    public int getDob() {
+    public String getDob() {
         return dob;
     }
 
-    public void setDob(int dob) {
+    public void setDob(String dob) {
         this.dob = dob;
     }
 

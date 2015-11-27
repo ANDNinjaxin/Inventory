@@ -139,6 +139,15 @@
 
     </RelativeLayout>
 
+    <Spinner
+        android:id="@+id/spinnerstudents"
+        android:layout_above="@+id/btnaddstudent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+    </Spinner>
+
     <Button
         android:id="@+id/btnaddstudent"
         android:layout_width="match_parent"

@@ -3,7 +3,6 @@ package yt.inventory.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,7 +19,7 @@ import java.util.ArrayList;
 import yt.inventory.App;
 import yt.inventory.R;
 import yt.inventory.activity.SimpleScannerActivity;
-import yt.inventory.logic.BookLogic;
+import yt.inventory.logic.Logic;
 import yt.inventory.object.Book;
 
 /**
@@ -30,6 +28,7 @@ import yt.inventory.object.Book;
 public class ManualInputBookFragment extends BaseFragment {
 
     public static final int SCAN_REQUEST_CODE = 0;
+
 
 
     public static ManualInputBookFragment newInstance() {
@@ -194,11 +193,11 @@ public class ManualInputBookFragment extends BaseFragment {
      */
 
     private String retrieveLevel(String scanned) {
-        return BookLogic.identifyLevel(scanned);
+        return Logic.identifyBookLevel(scanned);
     }
 
     private String retrieveBookID(String scanned) {
-        return BookLogic.identifyBookID(scanned);
+        return Logic.identifyBookID(scanned);
     }
 
     private void scanBarcode() {
@@ -228,8 +227,8 @@ public class ManualInputBookFragment extends BaseFragment {
             return;
         }
 
-        String tempLevel = BookLogic.identifyLevel(contents);
-        String tempBookID = BookLogic.identifyBookID(contents);
+        String tempLevel = Logic.identifyBookLevel(contents);
+        String tempBookID = Logic.identifyBookID(contents);
 
         if (contents.isEmpty() || (contents.trim().length() < 4) ) {
             App.showToast(getString(R.string.error_toast_scan_error));

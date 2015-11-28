@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/kumon">
+
+    <RelativeLayout
+        android:id="@+id/RLscanstudent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin"
+        android:padding="@dimen/margin_small"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/RLscanstudentcontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvscanstudent"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/field_input"
+                android:gravity="center"
+                android:text="@string/manual_input_scan"/>
+
+            <Button
+                android:id="@+id/btnscanstudent"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/tvscanstudent"
+                android:layout_alignTop="@+id/tvscanstudent"
+                android:gravity="center"
+                android:textSize="@dimen/field_input"
+                android:layout_centerVertical="true"
+                android:text="@string/manual_input_button_scan" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RLotherstudentoptioncontainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RLscanstudentcontainer">
+
+            <TextView
+                android:id="@+id/tvscanstudentor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_medlarge"
+                android:layout_marginBottom="@dimen/margin_medlarge"
+                android:gravity="center"
+                android:textSize="@dimen/field_input"
+                android:text="@string/manual_input_scan_or" />
+
+            <Spinner
+                android:id="@+id/spstudentlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvscanstudentor"
+                android:gravity="center"
+
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/tvscanstudentor2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spstudentlist"
+                android:layout_marginTop="@dimen/margin_medlarge"
+                android:layout_marginBottom="@dimen/margin_medlarge"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:textSize="@dimen/field_input"
+                android:text="@string/manual_input_scan_or" />
+
+            <TextView
+                android:id="@+id/tvmanualenter"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_below="@+id/tvscanstudentor2"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/field_input"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_blue_dark"
+                android:text="@string/checkout_input_new_student" />
+
+            <TextView
+                android:id="@+id/tvnewfirstname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_below="@+id/tvmanualenter"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/field_input"
+                android:text="@string/checkout_input_tv_firstname" />
+
+            <EditText
+                android:id="@+id/etnewfirstname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_toRightOf="@+id/tvnewfirstname"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_alignTop="@id/tvnewfirstname"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textSize="@dimen/field_input"/>
+
+            <TextView
+                android:id="@+id/tvnewlastname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_below="@+id/tvnewfirstname"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:textSize="@dimen/field_input"
+                android:gravity="center_vertical"
+                android:text="@string/checkout_input_tv_lastname" />
+
+            <EditText
+                android:id="@+id/etnewlastname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_toRightOf="@+id/tvnewlastname"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/tvnewlastname"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textSize="@dimen/field_input"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RLscansuccess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/RLscanstudentcontainer">
+
+            <TextView
+                android:id="@+id/tvsuccessfirstname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/field_input"
+                android:text="@string/checkout_input_tv_firstname" />
+
+            <EditText
+                android:id="@+id/etsuccessfirstname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_toRightOf="@+id/tvsuccessfirstname"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_alignTop="@id/tvsuccessfirstname"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textSize="@dimen/field_input"/>
+
+            <TextView
+                android:id="@+id/tvsuccesslastname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_below="@+id/tvsuccessfirstname"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:textSize="@dimen/field_input"
+                android:gravity="center_vertical"
+                android:text="@string/checkout_input_tv_lastname" />
+
+            <EditText
+                android:id="@+id/etsuccesslastname"
+                android:layout_width="@dimen/field_input_width"
+                android:layout_height="@dimen/field_input_height"
+                android:layout_marginRight="@dimen/margin_small"
+                android:layout_toRightOf="@+id/tvsuccesslastname"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/tvsuccesslastname"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:textSize="@dimen/field_input"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btnclearcheckoutstudent"
+            android:layout_width="@dimen/field_input_width"
+            android:layout_height="@dimen/field_input_height"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/field_input"
+            android:text="@string/button_clear"/>
+
+        <Button
+            android:id="@+id/btnnextcheckoutstudent"
+            android:layout_width="@dimen/field_input_width"
+            android:layout_height="@dimen/field_input_height"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/field_input"
+            android:text="@string/button_next"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

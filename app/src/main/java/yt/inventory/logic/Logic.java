@@ -62,7 +62,7 @@ public class Logic {
 
 
 
-    public static String inputStudentID(String id) {
+    public static String importStudentID(String id) {
         try {
             int stuID = Integer.parseInt(id.trim());
             return "" + stuID;
@@ -74,12 +74,14 @@ public class Logic {
         return "";
     }
 
-    public static String inputStudentDOB(String rawDOB) {
+    public static String importStudentDOB(String rawDOB) {
+        //xls file is formatted (m)m/(d)d/yyyy
+
         rawDOB = rawDOB.trim();
         String[] partDOB = rawDOB.split("/");
-        if (rawDOB.length() != 8) {
-            return "";
-        }
+//        if (rawDOB.length() != 8) {
+//            return "";
+//        }
 
         if ((partDOB[0] == null) || (partDOB[1] == null) || (partDOB[2] == null) || (partDOB[3] != null)) {
             return "";
@@ -95,6 +97,20 @@ public class Logic {
                 parts[i] = Integer.parseInt(partDOB[i]);
             }
 
+            boolean validsubsizes =
+                    (partDOB[0].length() <= 2) && (partDOB[1].length() <= 2) && (partDOB[2].length() == 4);
+
+            if (!validsubsizes) {
+                return "";
+            }
+
+            if (partDOB[0].length() < 2) {
+                partDOB[0] = "0" + partDOB[0];
+            }
+            if (partDOB[1].length() < 2) {
+                partDOB[1] = "0" + partDOB[1];
+            }
+
             return dobTOyyyymmdd(partDOB[0], partDOB[1], partDOB[2]);
 
         } catch (NumberFormatException e) {
@@ -104,7 +120,7 @@ public class Logic {
         return "";
     }
 
-    public static String dobTOyyyymmdd(String yyyy, String mm, String dd) {
+    public static String dobTOyyyymmdd(String mm, String dd, String yyyy) {
         return (yyyy + mm + dd);
     }
 

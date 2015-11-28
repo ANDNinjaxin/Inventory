@@ -63,16 +63,24 @@
     <string name="manual_input_scan">Scan Barcode: </string>
     <string name="manual_input_button_scan">Scan</string>
     <string name="manual_input_scan_or"> OR </string>
+    <string name="checkout_input_new_student">New Student: </string>
+    <string name="checkout_input_tv_lastname">Last Name: </string>
+    <string name="checkout_input_tv_firstname">First Name: </string>
+    <string name="checkout_book_availability">Availability: </string>
 
     <string name="manual_input_student_success">Successfully added student!</string>
     <string name="manual_input_book_success">Successfully added book!</string>
 
     <string name="error_toast_required_fields">Please complete the required fields!</string>
     <string name="error_toast_scan_error">Check Barcode! Invalid data!</string>
+    <string name="error_toast_scan_student">Invalid student barcode!</string>
 
     <string name="button_look_up_book">Get Book Info</string>
     <string name="button_add_student">ADD STUDENT</string>
     <string name="button_add_book">ADD BOOK</string>
+    <string name="button_clear">CLEAR</string>
+    <string name="button_next">NEXT >></string>
+    <string name="button_checkout_book">Check Out</string>
 
 
     <!--    Messages    -->

@@ -34,6 +34,7 @@ public class App extends Application {
     public static final int ERROR_STUDENT_ID = -1;
 
     public static final String INTERNAL_FILE_NAME = "studentlist.xls";
+    public static final int STANDARD_STUDENT_ID_LENGTH = 13;
 
     private static App instance;
     private static Context context;

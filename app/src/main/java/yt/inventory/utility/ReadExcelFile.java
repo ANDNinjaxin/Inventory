@@ -9,7 +9,6 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-import org.w3c.dom.EntityReference;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -106,8 +105,8 @@ public class ReadExcelFile {
                         case sDOB:
                             cDOB = contents; break;
                         case sEnd:
-                            cID = Logic.inputStudentID(cID);
-                            cDOB = Logic.inputStudentDOB(cDOB);
+                            cID = Logic.importStudentID(cID);
+                            cDOB = Logic.importStudentDOB(cDOB);
                             Student stu = new Student(cID, cFN, cLN, cDOB);
                             studentArrayList.add(stu);
 

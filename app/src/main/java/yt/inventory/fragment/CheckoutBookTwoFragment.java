@@ -20,41 +20,41 @@ import yt.inventory.App;
 import yt.inventory.R;
 import yt.inventory.activity.SimpleScannerActivity;
 import yt.inventory.logic.Logic;
-import yt.inventory.object.Book;
 
 /**
- * Created by Ninjaxin on 11/3/15.
+ * Created by Ninjaxin on 11/28/2015.
  */
-public class ManualInputBookFragment extends BaseFragment {
+public class CheckoutBookTwoFragment extends BaseFragment {
 
     public static final int SCAN_REQUEST_CODE = 0;
 
+    public static final String PASS_STUDENT_ID = "studid";
 
 
-    public static ManualInputBookFragment newInstance() {
+
+    public static CheckoutBookTwoFragment newInstance(String studentID) {
         //params
 
-        ManualInputBookFragment fragment = new ManualInputBookFragment();
+        CheckoutBookTwoFragment fragment = new CheckoutBookTwoFragment();
 
-//        Bundle args = new Bundle();
-//        args.putSerializable();
-//        fragment.setArguments(args);
+        Bundle args = new Bundle();
+        args.putSerializable(PASS_STUDENT_ID, studentID);
+        fragment.setArguments(args);
 
         return fragment;
     }
 
-
     private View view;
     private RelativeLayout RLbooklevel,
-                            RLbooknumber,
-                            RLbookavailable,
-                            RLbookbarcode;
+            RLbooknumber,
+            RLbookavailable,
+            RLbookbarcode;
     private Button btnScan,
-                    btnAddBook;
+            btnAddBook;
     private EditText etbooknumber;
     private Spinner etbooklevel;
-    private TextView etbookbarcode;
-    private CheckBox cbbookavailable;
+    private TextView etbookbarcode,
+                    etbookavailability;
 
     private String sBookID = "";
     private String sBookLevel = "";
@@ -96,7 +96,7 @@ public class ManualInputBookFragment extends BaseFragment {
 
         etbooklevel = (Spinner) view.findViewById(R.id.etbooklevel);
         etbooknumber = (EditText) view.findViewById(R.id.etbooknumber);
-        cbbookavailable = (CheckBox) view.findViewById(R.id.etbookavailable);
+        etbookavailability = (TextView) view.findViewById(R.id.etbookavailable);
         etbookbarcode = (TextView) view.findViewById(R.id.etbookbarcode);
 
 
@@ -106,7 +106,7 @@ public class ManualInputBookFragment extends BaseFragment {
     }
 
     private void initPreloadUI() {
-        cbbookavailable.setChecked(true);
+        etbookavailability.setText("N/A");
 
         spinnerAdapter = ArrayAdapter
                 .createFromResource(App.getContext(), R.array.kumon_book_levels,
@@ -136,38 +136,18 @@ public class ManualInputBookFragment extends BaseFragment {
 
     }
 
-
-    //Pull from public ISBN DB
-    private void getBookDBRequest() {
-
-    }
-
-    private void addBook() {
-        //TODO: Set id = barcode;
-        //TODO: Create unique barcode generator;
-
-        boolean validBook = (!App.isEmpty(etbooklevel.getSelectedItem()))
-                && nonEmpty(etbooknumber);
-        if (validBook) {
-            //TODO: need valid book number (int)
-
-            Book book;
-            book = new Book(sBookID, sBookLevel, sBookNumber, sBookAvailable);
-            App.addBook(book);
-
-        }
-    }
-
     private void getFields() {
         sBookID = etbookbarcode.getText().toString();
         sBookLevel = etbooklevel.getSelectedItem().toString();
         sBookNumber = App.getString(etbooknumber);
 
-        if (cbbookavailable.isChecked()) {
-            sBookAvailable = true;
-        } else {
-            sBookAvailable = false;
-        }
+
+        //TODO: check availability
+//        if (cbbookavailable.isChecked()) {
+//            sBookAvailable = true;
+//        } else {
+//            sBookAvailable = false;
+//        }
 
     }
 
@@ -175,7 +155,6 @@ public class ManualInputBookFragment extends BaseFragment {
         resetCache();
         //TODO: spinner selection to empty;
         etbooknumber.setText("");
-        cbbookavailable.setChecked(true);
         etbookbarcode.setText("");
 
         initPreloadUI();
@@ -186,18 +165,6 @@ public class ManualInputBookFragment extends BaseFragment {
             return false;
         }
         return true;
-    }
-
-    /**
-     * Logic
-     */
-
-    private String retrieveLevel(String scanned) {
-        return Logic.identifyBookLevel(scanned);
-    }
-
-    private String retrieveBookID(String scanned) {
-        return Logic.identifyBookID(scanned);
     }
 
     private void scanBarcode() {
@@ -260,9 +227,10 @@ public class ManualInputBookFragment extends BaseFragment {
 
     }
 
+
     @Override
     public Integer getLayoutId() {
-        return R.layout.fragment_manual_input_book;
+        return null;
     }
 
     @Override

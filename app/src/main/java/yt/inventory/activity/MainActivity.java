@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import yt.inventory.App;
 import yt.inventory.R;
+import yt.inventory.fragment.CheckoutBookFragment;
+import yt.inventory.fragment.CheckoutBookTwoFragment;
 import yt.inventory.fragment.HomeFragment;
 import yt.inventory.fragment.ImportDataFragment;
 import yt.inventory.fragment.ManualInputDataFragment;
@@ -102,6 +104,16 @@ public class MainActivity extends ActionBarActivity {
 
     public void gotoManualImportData() {
         final Fragment fragment = new ManualInputDataFragment();
+        replaceMainFragment(fragment);
+    }
+
+    public void gotoCheckoutBook() {
+        final Fragment fragment = new CheckoutBookFragment();
+        replaceMainFragment(fragment);
+    }
+
+    public void gotoCheckoutBookTwo(String studid) {
+        final Fragment fragment = CheckoutBookTwoFragment.newInstance(studid);
         replaceMainFragment(fragment);
     }
 
@@ -207,6 +219,10 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
+        if (fragmentManager.getBackStackEntryCount() < 2) {
+            fragmentManager.popBackStack();
+        }
     }
 
     @Override
@@ -216,4 +232,6 @@ public class MainActivity extends ActionBarActivity {
         App.saveAllData();
 
     }
+
+
 }

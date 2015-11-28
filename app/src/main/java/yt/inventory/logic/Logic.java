@@ -64,7 +64,7 @@ public class Logic {
 
     public static String importStudentID(String id) {
         try {
-            int stuID = Integer.parseInt(id.trim());
+            long stuID = Long.parseLong(id.trim());
             return "" + stuID;
 
         } catch (NumberFormatException e) {
@@ -78,18 +78,74 @@ public class Logic {
         //xls file is formatted (m)m/(d)d/yyyy
 
         rawDOB = rawDOB.trim();
-        String[] partDOB = rawDOB.split("/");
+        String[] partDOB;
+
+        if (rawDOB.contains("/")) {
+            partDOB = rawDOB.split("/");
+
+            if ((partDOB[0] == null) || (partDOB[1] == null) || (partDOB[2] == null)) {
+                return "";
+
+            } else if (partDOB[0].isEmpty() || partDOB[1].isEmpty() || partDOB[2].isEmpty()) {
+                return "";
+
+            }
+
+        } else if (rawDOB.contains("-")) {
+            partDOB = rawDOB.split("-");
+
+            if ((partDOB[0] == null) || (partDOB[1] == null) || (partDOB[2] == null)) {
+                return "";
+
+            } else if (partDOB[0].isEmpty() || partDOB[1].isEmpty() || partDOB[2].isEmpty()) {
+                return "";
+
+            }
+
+            String mo = partDOB[1].toLowerCase().trim();
+
+            switch(mo) {
+                case "jan":
+                    partDOB[1] = "01";  break;
+                case "feb":
+                    partDOB[1] = "02";  break;
+                case "mar":
+                    partDOB[1] = "03";  break;
+                case "apr":
+                    partDOB[1] = "04";  break;
+                case "may":
+                    partDOB[1] = "05";  break;
+                case "jun":
+                    partDOB[1] = "06";  break;
+                case "jul":
+                    partDOB[1] = "07";  break;
+                case "aug":
+                    partDOB[1] = "08";  break;
+                case "sep":
+                    partDOB[1] = "09";  break;
+                case "oct":
+                    partDOB[1] = "10";  break;
+                case "nov":
+                    partDOB[1] = "11";  break;
+                case "dec":
+                    partDOB[1] = "12";  break;
+                default:
+                    return "";
+
+            }
+
+            String temp = partDOB[0];
+            partDOB[0] = partDOB[1];
+            partDOB[1] = temp;
+
+        } else {
+            return "";
+        }
 //        if (rawDOB.length() != 8) {
 //            return "";
 //        }
 
-        if ((partDOB[0] == null) || (partDOB[1] == null) || (partDOB[2] == null) || (partDOB[3] != null)) {
-            return "";
-
-        } else if (partDOB[0].isEmpty() || partDOB[1].isEmpty() || partDOB[2].isEmpty()) {
-            return "";
-
-        }
+        //TODO: Logic for birthdates with dd-mmm-yyyy AND mm/dd/yyyy
 
         int[] parts = new int[3];
         try {
@@ -116,6 +172,7 @@ public class Logic {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
+
 
         return "";
     }

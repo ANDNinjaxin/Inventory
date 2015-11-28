@@ -17,6 +17,7 @@
     <dimen name="field_input">16sp</dimen>
     <dimen name="field_help">12sp</dimen>
     <dimen name="button_text">20sp</dimen>
+    <dimen name="menu_title">24sp</dimen>
 
     <dimen name="field_separation">50dp</dimen>
 

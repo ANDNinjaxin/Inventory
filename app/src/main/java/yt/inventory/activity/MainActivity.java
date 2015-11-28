@@ -5,20 +5,27 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import yt.inventory.App;
 import yt.inventory.R;
 import yt.inventory.fragment.CheckoutBookFragment;
 import yt.inventory.fragment.CheckoutBookTwoFragment;
+import yt.inventory.fragment.DashboardFragment;
 import yt.inventory.fragment.HomeFragment;
 import yt.inventory.fragment.ImportDataFragment;
 import yt.inventory.fragment.ManualInputDataFragment;
@@ -26,7 +33,7 @@ import yt.inventory.utility.ReadExcelFile;
 import yt.inventory.utility.StarterRoutine;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends FragmentActivity {
 
     public static final String TAG = MainActivity.class.getCanonicalName();
     public static final String TAG_MAIN_FRAGMENT = TAG + ".MainContainer";
@@ -36,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
 
     protected FragmentManager fragmentManager;
 
-
+    private TextView tvtoolbarmenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +51,11 @@ public class MainActivity extends ActionBarActivity {
 
         fragmentManager = getSupportFragmentManager();
 
-        setContentView(R.layout.activity_main);
-
         App.setMainActivity(this);
         App.initialize();
+//        hideToolbar();
+        setContentView(R.layout.activity_main);
+        initView();
 
         if (App.isFirstRun()) {
 
@@ -63,6 +71,21 @@ public class MainActivity extends ActionBarActivity {
             }
         }
 
+    }
+
+    private void initView() {
+        tvtoolbarmenu = (TextView) findViewById(R.id.toolbarmenu);
+
+
+        tvtoolbarmenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) {
+                    fragmentManager.popBackStack();
+                }
+                gotoDashboard();
+            }
+        });
     }
 
 
@@ -94,6 +117,11 @@ public class MainActivity extends ActionBarActivity {
 
     public void gotoHomePage() {
         final Fragment fragment = new HomeFragment();
+        replaceMainFragment(fragment);
+    }
+
+    public void gotoDashboard() {
+        final Fragment fragment = DashboardFragment.newInstance();
         replaceMainFragment(fragment);
     }
 
@@ -199,6 +227,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void hideToolbar() {
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 
     @Override

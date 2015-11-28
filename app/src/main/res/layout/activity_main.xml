@@ -5,10 +5,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:id="@+id/faketoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_xxlarge">
+
+        <TextView
+            android:id="@+id/toolbarmenu"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/menu_title"
+            android:gravity="center_vertical"
+            android:textStyle="bold"
+            android:text="TESTING MENU"/>
+
+    </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/base_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/faketoolbar">
 
     </FrameLayout>
 

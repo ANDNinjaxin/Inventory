@@ -6,8 +6,8 @@ package yt.inventory.logic;
 public class Transact {
 
 
-    public static void checkout(String studentid, String bookid) {
-        
+    public static void checkoutBook(String studentid, String bookid) {
+
     }
 
 }

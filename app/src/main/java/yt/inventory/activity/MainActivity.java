@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +19,9 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +33,7 @@ import yt.inventory.fragment.DashboardFragment;
 import yt.inventory.fragment.HomeFragment;
 import yt.inventory.fragment.ImportDataFragment;
 import yt.inventory.fragment.ManualInputDataFragment;
+import yt.inventory.object.Student;
 import yt.inventory.utility.ReadExcelFile;
 import yt.inventory.utility.StarterRoutine;
 
@@ -45,6 +50,46 @@ public class MainActivity extends FragmentActivity {
 
     private TextView tvtoolbarmenu;
 
+
+    private ListView lvUserDashboard,
+            lvAdminDashboard;
+    private final String
+            CHECK_OUT = "Checkout Book",
+            CHECK_IN = "Return Book",
+            NEW_STUDENT = "New Student",
+            NEW_BOOK = "New Book",
+            SWITCH_ADMIN = "Admin Mode",
+            SWITCH_USER = "EXIT Admin Mode",
+            RESET_PIN = "Reset Pin",
+            EDIT_STUDENT = "Edit Student",
+            EDIT_BOOK = "Edit Book",
+            EDIT_TRANSACTION = "Edit Transaction";
+
+
+    private String[] adminlist = {
+            CHECK_OUT,
+            CHECK_IN,
+            NEW_STUDENT,
+            NEW_BOOK,
+            SWITCH_USER,
+            EDIT_STUDENT,
+            EDIT_BOOK,
+            EDIT_TRANSACTION,
+            RESET_PIN
+    };
+    private String[] userlist = {
+            CHECK_OUT,
+            CHECK_IN,
+            NEW_STUDENT,
+            NEW_BOOK,
+            RESET_PIN,
+            SWITCH_ADMIN
+    };
+    private ArrayAdapter<String> adapteradmin, adapteruser;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +104,17 @@ public class MainActivity extends FragmentActivity {
 
         if (App.isFirstRun()) {
 
-            ReadExcelFile.readFile(this, App.INTERNAL_FILE_NAME);
+            long start = System.nanoTime();
+
+            new AsyncLoadData().execute();
+//            App.loadAllData();
+
+            long elapsed = System.nanoTime() - start;
+            Log.v("benchmark: ", "incode Loaddata:  " + elapsed);
+
+//            ReadExcelFile.readFile(this, App.INTERNAL_FILE_NAME);
+            App.getDefaultPin();
+            gotoCheckoutBook();
             gotoManualImportData();
             //startupRoutine();
 
@@ -120,10 +175,10 @@ public class MainActivity extends FragmentActivity {
         replaceMainFragment(fragment);
     }
 
-    public void gotoDashboard() {
-        final Fragment fragment = DashboardFragment.newInstance();
-        replaceMainFragment(fragment);
-    }
+//    public void gotoDashboard() {
+//        final Fragment fragment = DashboardFragment.newInstance();
+//        replaceMainFragment(fragment);
+//    }
 
     public void gotoImportData() {
         final Fragment fragment = new ImportDataFragment();
@@ -131,19 +186,153 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void gotoManualImportData() {
+        //TODO: int parameter: 0 or 1 for tab default
         final Fragment fragment = new ManualInputDataFragment();
         replaceMainFragment(fragment);
     }
+
+
 
     public void gotoCheckoutBook() {
         final Fragment fragment = new CheckoutBookFragment();
         replaceMainFragment(fragment);
     }
 
-    public void gotoCheckoutBookTwo(String studid) {
+    public void gotoCheckoutBookTwo(Student studid) {
         final Fragment fragment = CheckoutBookTwoFragment.newInstance(studid);
         replaceMainFragment(fragment);
     }
+
+    public String checkAdminMode() {
+        if (App.isAdmin()) {
+            return "Admin";
+        } else {
+            return "MENU";
+        }
+    }
+
+    public void setTitle(String title) {
+        String base = checkAdminMode();
+        if ( (title == null) || (title.isEmpty()) ) {
+            tvtoolbarmenu.setText(base);
+            return;
+        }
+        if (title.equalsIgnoreCase(" ")) {
+            return;
+        }
+        String ext = " / " + title;
+        tvtoolbarmenu.setText(base + ext);
+    }
+
+    public void gotoDashboard() {
+
+        adapteradmin = new ArrayAdapter<String>(App.getContext(), R.layout.spinner_item_book_level, adminlist);
+        adapteruser = new ArrayAdapter<String>(App.getContext(), R.layout.spinner_item_book_level, userlist);
+
+        lvUserDashboard = (ListView) findViewById(R.id.lvdashboarduser);
+        lvAdminDashboard = (ListView) findViewById(R.id.lvdashboardadmin);
+        setDashboard();
+        lvAdminDashboard.setAdapter(adapteradmin);
+        lvUserDashboard.setAdapter(adapteruser);
+
+        setupDashboardListeners();
+
+    }
+
+    private void setupDashboardListeners() {
+        lvUserDashboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String choice = lvUserDashboard.getItemAtPosition(position).toString();
+                dashboardChoice(choice);
+            }
+        });
+
+        lvAdminDashboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String choice = lvAdminDashboard.getItemAtPosition(position).toString();
+                dashboardChoice(choice);
+            }
+        });
+
+
+    }
+
+    private void setDashboard() {
+        if (App.isAdmin()) {
+            tvtoolbarmenu.setText("DASHBOARD - ADMIN MODE");
+            lvAdminDashboard.setVisibility(View.VISIBLE);
+            lvUserDashboard.setVisibility(View.GONE);
+        } else {
+            tvtoolbarmenu.setText("DASHBOARD - USER MODE");
+            lvUserDashboard.setVisibility(View.VISIBLE);
+            lvAdminDashboard.setVisibility(View.GONE);
+        }
+    }
+
+    private void hideDashboards() {
+        lvAdminDashboard.setVisibility(View.GONE);
+        lvUserDashboard.setVisibility(View.GONE);
+    }
+
+    private void dashboardChoice(String choice) {
+        hideDashboards();
+
+        switch (choice) {
+            case CHECK_OUT:
+                gotoCheckoutBook();
+                gotoCheckoutBook();
+                break;
+            case CHECK_IN:
+                //TODO: RETURNING
+                App.showToast("NOT YET IMPLEMENTED!");
+                gotoDashboard();
+                break;
+            case NEW_STUDENT:
+                gotoManualImportData();
+                break;
+            case NEW_BOOK:
+                gotoManualImportData();
+                break;
+            case SWITCH_ADMIN:
+                //TODO: AdminLogin()
+                App.showToast("NOT YET IMPLEMENTED!");
+                gotoDashboard();
+                break;
+            case SWITCH_USER:
+                //TODO: AdminLogin()
+                App.showToast("NOT YET IMPLEMENTED!");
+                gotoDashboard();
+                break;
+            case RESET_PIN:
+                //TODO: make
+                App.showToast("NOT YET IMPLEMENTED!");
+                gotoDashboard();
+                break;
+            case EDIT_STUDENT:
+                //TODO: admin mode to edit students from fake DB
+                App.showToast("NOT YET IMPLEMENTED!");
+                gotoDashboard();
+                break;
+            case EDIT_BOOK:
+                //TODO: admin mode to edit books from fake DB
+                App.showToast("NOT YET IMPLEMENTED!");
+                gotoDashboard();
+                break;
+            case EDIT_TRANSACTION:
+                //TODO: admin mode to edit transactions from fake DB
+                App.showToast("NOT YET IMPLEMENTED!");
+                gotoDashboard();
+                break;
+
+            default:
+                gotoDashboard();
+                Log.v(TAG, "Listview choice didn't work");
+        }
+
+    }
+
 
 
     /**
@@ -236,11 +425,18 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        long start = System.nanoTime();
+        new AsyncSaveData().execute();
+        long elapsed = System.nanoTime() - start;
+        Log.v("benchmark: ", "onPause/save:  " + elapsed);
+
+        Log.v(TAG, "Paused");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
     }
 
     @Override
@@ -254,6 +450,7 @@ public class MainActivity extends FragmentActivity {
 
         if (fragmentManager.getBackStackEntryCount() < 2) {
             fragmentManager.popBackStack();
+            gotoDashboard();
         }
     }
 
@@ -261,9 +458,47 @@ public class MainActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        App.saveAllData();
-
+        Log.v(TAG, "Destroyed");
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
 
+        long start = System.nanoTime();
+        new AsyncSaveData().execute();
+        long elapsed = System.nanoTime() - start;
+        Log.v("benchmark: ", "onStop/save:  " + elapsed);
+
+        Log.v(TAG, "Stopped");
+    }
+
+    private class AsyncSaveData extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            long start = System.nanoTime();
+            App.saveAllData();
+            long elapsed = System.nanoTime() - start;
+            Log.v("benchmark: ", "save inside async:  " + elapsed);
+
+            //App.saveAllData();
+            return null;
+        }
+    }
+
+    private class AsyncLoadData extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            long start = System.nanoTime();
+            App.loadAllData();
+            long elapsed = System.nanoTime() - start;
+            Log.v("benchmark: ", "load inside async:  " + elapsed);
+
+            //App.loadAllData();
+            return null;
+        }
+    }
 }

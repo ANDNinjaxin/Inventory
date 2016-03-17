@@ -83,7 +83,7 @@ public class ManualInputDataFragment extends BaseFragment {
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 float pos = position;
                 float rawFloat = pos + positionOffset;
-                rawFloat = rawFloat/2;
+                rawFloat = rawFloat / 2;
 
                 float truePos = rawFloat * getScreenWidth();
                 fakeIndicator.setX(truePos);
@@ -92,6 +92,7 @@ public class ManualInputDataFragment extends BaseFragment {
             @Override
             public void onPageSelected(int position) {
                 focusedTab = position;
+                setTitle(position);
             }
 
             @Override
@@ -120,6 +121,20 @@ public class ManualInputDataFragment extends BaseFragment {
 
     }
 
+    private void setTitle(int position) {
+        if (position == TAB_STUDENT) {
+            App.setTitle("New Student");
+        } else if (position == TAB_BOOK) {
+            App.setTitle("New Book");
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        setTitle(TAB_STUDENT);
+    }
+
     private LinearLayout.LayoutParams setIndicatorSize() {
         final int width = (int) getScreenWidth()/2;
         final LinearLayout.LayoutParams indicatorParams = new LinearLayout.LayoutParams(width, App.dpToInt(2));
@@ -145,6 +160,6 @@ public class ManualInputDataFragment extends BaseFragment {
 
     @Override
     public String getTitle() {
-        return getString(R.string.fragmentmanualinput);
+        return " ";
     }
 }

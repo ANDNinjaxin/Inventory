@@ -1,11 +1,13 @@
 package yt.inventory.object;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Ninjaxin on 7/27/15.
  */
-public class Student {
+
+public class Student implements Serializable{
 
     private String id;
     private String lastName;
@@ -107,4 +109,12 @@ public class Student {
     public void setStudentsBookHistory(ArrayList<BookTransaction> studentsBookHistory) {
         this.studentsBookHistory = studentsBookHistory;
     }
+
+    public void addTransaction(BookTransaction bookTransaction) {
+        this.studentsBookHistory.add(bookTransaction);
+    }
+
+//    public boolean editStudentBookTransaction(BookTransaction bookTransaction,) {
+//        if ()
+//    }
 }

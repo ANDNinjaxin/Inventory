@@ -49,6 +49,8 @@ public class ReadExcelFile {
 
     public static void readFile(Context context, String filename) {
         ArrayList<Student> studentArrayList = new ArrayList<>();
+        Student zeroStudent = new Student("-10", "New Student", "", "00000000");
+        studentArrayList.add(zeroStudent);
 
         try {
             String localfilepath = "/" + filename;
@@ -67,6 +69,7 @@ public class ReadExcelFile {
             if (rowIterator.hasNext()) {
                 rowIterator.next();
             }
+
             rowloop:
             while (rowIterator.hasNext()) {
                 HSSFRow row = (HSSFRow) rowIterator.next();

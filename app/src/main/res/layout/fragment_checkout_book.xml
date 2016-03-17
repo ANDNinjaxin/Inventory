@@ -150,7 +150,7 @@
 
             <TextView
                 android:id="@+id/tvsuccessfirstname"
-                android:layout_width="@dimen/field_input_width"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/field_input_height"
                 android:layout_marginLeft="@dimen/margin_small"
                 android:layout_alignParentLeft="true"
@@ -159,41 +159,25 @@
                 android:textSize="@dimen/field_input"
                 android:text="@string/checkout_input_tv_firstname" />
 
-            <EditText
-                android:id="@+id/etsuccessfirstname"
-                android:layout_width="@dimen/field_input_width"
+            <TextView
+                android:id="@+id/tvsuccessmiddlespacer"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/field_input_height"
                 android:layout_toRightOf="@+id/tvsuccessfirstname"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/margin_small"
-                android:layout_alignTop="@id/tvsuccessfirstname"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:textSize="@dimen/field_input"/>
+                android:layout_marginLeft="@dimen/margin_small"
+                android:textSize="@dimen/field_input"
+                android:gravity="center_vertical"
+                android:text="  " />
 
             <TextView
                 android:id="@+id/tvsuccesslastname"
-                android:layout_width="@dimen/field_input_width"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/field_input_height"
-                android:layout_below="@+id/tvsuccessfirstname"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tvsuccessmiddlespacer"
                 android:layout_marginLeft="@dimen/margin_small"
                 android:textSize="@dimen/field_input"
                 android:gravity="center_vertical"
                 android:text="@string/checkout_input_tv_lastname" />
-
-            <EditText
-                android:id="@+id/etsuccesslastname"
-                android:layout_width="@dimen/field_input_width"
-                android:layout_height="@dimen/field_input_height"
-                android:layout_marginRight="@dimen/margin_small"
-                android:layout_toRightOf="@+id/tvsuccesslastname"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@id/tvsuccesslastname"
-                android:layout_centerVertical="true"
-                android:gravity="center"
-                android:textSize="@dimen/field_input"/>
 
         </RelativeLayout>
 
@@ -206,6 +190,7 @@
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:textColor="@color/black"
             android:textSize="@dimen/field_input"
             android:text="@string/button_clear"/>
 
@@ -218,6 +203,7 @@
             android:gravity="center"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:textColor="@color/black"
             android:textSize="@dimen/field_input"
             android:text="@string/button_next"/>
 

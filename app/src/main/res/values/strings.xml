@@ -82,6 +82,7 @@
     <string name="button_next">NEXT >></string>
     <string name="button_checkout_book">Check Out</string>
 
+    <string name="empty_student">New Student</string>
 
     <!--    Messages    -->
     <string name="startup_no_data">There appears to be no valid data.

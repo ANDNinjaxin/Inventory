@@ -20,6 +20,7 @@ import yt.inventory.App;
 import yt.inventory.R;
 import yt.inventory.activity.SimpleScannerActivity;
 import yt.inventory.logic.Logic;
+import yt.inventory.object.Student;
 
 /**
  * Created by Ninjaxin on 11/28/2015.
@@ -32,7 +33,7 @@ public class CheckoutBookTwoFragment extends BaseFragment {
 
 
 
-    public static CheckoutBookTwoFragment newInstance(String studentID) {
+    public static CheckoutBookTwoFragment newInstance(Student studentID) {
         //params
 
         CheckoutBookTwoFragment fragment = new CheckoutBookTwoFragment();
@@ -230,11 +231,11 @@ public class CheckoutBookTwoFragment extends BaseFragment {
 
     @Override
     public Integer getLayoutId() {
-        return null;
+        return R.layout.fragment_checkout_book_two;
     }
 
     @Override
     public String getTitle() {
-        return null;
+        return "Checkout";
     }
 }

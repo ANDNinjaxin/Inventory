@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,7 +16,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,6 +33,8 @@ import yt.inventory.object.Student;
  * Created by Ninjaxin on 7/28/15.
  */
 public class App extends Application {
+
+    private static final String TAG = "App.class";
 
     public static final int UNTAGGED_STUDENT_ID = 0;
     public static final int ERROR_STUDENT_ID = -1;
@@ -46,9 +52,37 @@ public class App extends Application {
     private static ArrayList<Student> studentList = new ArrayList<>();
     private static ArrayList<Book> bookList = new ArrayList<>();
     private static ArrayList<BookTransaction> bookTransactionList = new ArrayList<>();
+    private static int transactionCounter = 0;
+    private static int PIN;
 
+    private static boolean admin = false;
 
+    public static boolean isAdmin() {
+        return admin;
+    }
 
+    public static void validateLogin(int pin) {
+        if (pin == PIN) {
+            toggleAdmin(true);
+        }
+    }
+
+    public static boolean validateResetRequest(int pin) {
+        if ((pin == PIN) || (pin == getDefaultPin())) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void resetPin(int pin) {
+        PIN = pin;
+    }
+
+    public static void toggleAdmin(boolean toggle) {
+        admin = toggle;
+    }
+
+    //RRL book levels - not Ans Book levels
     public final static String[] KBookLevels = {
             "7A", "6A", "5A", "4A", "3A", "2A",
             "AI", "AII", "BI", "BII", "CI", "CII",
@@ -68,6 +102,10 @@ public class App extends Application {
 //        context = mainActivity.getApplicationContext();
         pref = context.getSharedPreferences(context.getPackageName(), Context.MODE_PRIVATE);
 
+    }
+
+    public static void setTitle(String title) {
+        App.getMainActivity().setTitle(title);
     }
 
     public static void setMainActivity(MainActivity mainActivity) {
@@ -103,11 +141,19 @@ public class App extends Application {
         pref.edit().putBoolean(string, page).commit();
     }
 
+    private static void setupPin() {
+        PIN = 1111;
+    }
+
     /*
             Data Handle
     */
     public static ArrayList<Student> getStudentList() {
         return studentList;
+    }
+
+    public static Student getStudent(int index) {
+        return studentList.get(index);
     }
 
     public static void setStudentList(ArrayList<Student> sList) {
@@ -142,6 +188,106 @@ public class App extends Application {
         bookTransactionList.add(transaction);
     }
 
+    public static boolean editBook(String id, boolean avail) {
+        if (App.getBookList() == null) {
+            return false;
+        }
+        for (Book book: bookList) {
+            if (book.getId().equalsIgnoreCase(id)) {
+                book.setIsAvailable(avail);
+                return true;
+            }
+        }
+        Log.v(TAG, "Did not match book editBook conditions.");
+        return false;
+    }
+
+    public static boolean addTransactionToStudent(String id, BookTransaction transaction) {
+        if (App.getStudentList() == null) {
+            return false;
+        }
+        for (Student student: studentList) {
+            if (student.getId().equalsIgnoreCase(id)) {
+                student.addTransaction(transaction);
+                return true;
+            }
+        }
+        Log.v(TAG, "Did not match check-out addTransactionToStudent conditions.");
+        return false;
+    }
+
+    //Checkin Option 1
+    public static boolean editStudentHistoryReturned(String id, int transaction, String returned) {
+        if ( (App.getStudentList() == null) || (App.getBookList() == null) ) {
+            return false;
+        }
+        for (Student student: studentList) {
+            if (student.getId().equalsIgnoreCase(id)) {
+
+                //TODO: add logic for return of undocumented books
+
+                for (BookTransaction bookTransaction: student.getStudentsBookHistory()) {
+                    if ( (bookTransaction.getTransactionID() == transaction) && (bookTransaction.getBookCheckedIn().equalsIgnoreCase("")) ) {
+                        bookTransaction.setBookCheckedIn(returned);
+                        return true;
+                    }
+                }
+            }
+        }
+        Log.v(TAG, "Did not match check-in conditions.");
+        return false;
+    }
+
+    //Checkin Option 2
+    public static boolean checkinStudentList(String bookid, BookTransaction trans) {
+        if ( (App.getBookList() == null) || (App.getStudentList() == null) ) {
+            return false;
+        }
+        for (Student student: studentList) {
+
+        }
+
+        Log.v(TAG, "Did not match check-in conditions");
+        return false;
+    }
+
+    public static boolean checkoutStudentList(String id, BookTransaction trans) {
+        if (App.getBookList() == null) {
+            return false;
+        }
+        for (Student student: studentList) {
+            if (student.getId().equalsIgnoreCase(id)) {
+                student.addTransaction(trans);
+                App.addBookTransaction(trans);
+                return true;
+            }
+        }
+        Log.v(TAG, "Did not match check-out conditions.");
+        return false;
+    }
+
+
+
+    /**
+     * Security Default Password
+     */
+    public static int getDefaultPin() {
+        SimpleDateFormat sdf1 = new SimpleDateFormat("MM");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd");
+        SimpleDateFormat sdf3 = new SimpleDateFormat("HH");
+        Calendar calendar = new GregorianCalendar();
+        String smm = sdf1.format(calendar.getTime());
+        String sdd = sdf2.format(calendar.getTime());
+        String shh = sdf3.format(calendar.getTime());
+        int mm = Integer.valueOf(smm);
+        int dd = Integer.valueOf(sdd);
+        int hh = Integer.valueOf(shh);
+        int barePin = mm * dd + hh;
+        int modPin = 23;
+        return (barePin * modPin);
+    }
+
+
     /**
      * Save Data
      */
@@ -157,12 +303,15 @@ public class App extends Application {
         editor.putString("booklist", jsonBookList).apply();
         editor.putString("studentlist", jsonStudentList).apply();
         editor.putString("booktransactionlist", jsonBookTransactionList).apply();
+        editor.putInt("transactioncount", transactionCounter).apply();
+        editor.putInt("PIN", PIN).apply();
 
         try {
 
         } catch (Exception e) {
 
         }
+
 
     }
 
@@ -189,6 +338,8 @@ public class App extends Application {
             bookList = cbookList;
             studentList = cstudentList;
             bookTransactionList = cbookTransactionList;
+            transactionCounter = pref.getInt("transactioncount", -1);
+            PIN = pref.getInt("PIN", 1111);
 
             return true;
 
@@ -237,6 +388,7 @@ public class App extends Application {
     /**
      * functions:
      */
+
     public static void showToast(String message) {
         showToast(message, Toast.LENGTH_LONG);
     }
@@ -300,6 +452,16 @@ public class App extends Application {
         } else {
             return "";
         }
+    }
+
+    public static boolean isEmpty(EditText e) {
+        if (e == null) {
+            return true;
+        }
+        if (e.getText().toString().trim().isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     public static boolean isEmpty(Object o) {

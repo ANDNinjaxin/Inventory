@@ -267,6 +267,6 @@ public class ManualInputBookFragment extends BaseFragment {
 
     @Override
     public String getTitle() {
-        return null;
+        return " ";
     }
 }

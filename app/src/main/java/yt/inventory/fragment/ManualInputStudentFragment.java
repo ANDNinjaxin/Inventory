@@ -130,9 +130,9 @@ public class ManualInputStudentFragment extends BaseFragment {
     }
 
     private boolean validStudentID(EditText temp) {
-        int tempID = -1;
+        long tempID = -1;
         try {
-            tempID = Integer.parseInt(temp.getText().toString());
+            tempID = Long.parseLong(temp.getText().toString());
             if (tempID > 1) {
                 return true;
             }
@@ -185,6 +185,6 @@ public class ManualInputStudentFragment extends BaseFragment {
 
     @Override
     public String getTitle() {
-        return null;
+        return " ";
     }
 }

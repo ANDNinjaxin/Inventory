@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import yt.inventory.App;
+
 /**
  * Created by Ninjaxin on 8/9/15.
  */
@@ -18,6 +20,7 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        App.getMainActivity().setTitle(getTitle());
     }
 
     @Nullable
